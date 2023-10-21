@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {},
+  "description": "Redefining Digital Freedom: Build, Adapt, Own.",
+  "homepage": "https://codyslexia.com",
   "private": true,
+  "author": "Moa Torres",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "@nx/js": "17.0.1",
