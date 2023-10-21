@@ -1,17 +1,32 @@
 {
   "name": "@codyslexia/source",
-  "version": "0.0.0",
-  "license": "MIT",
-  "scripts": {},
   "description": "Redefining Digital Freedom: Build, Adapt, Own.",
   "homepage": "https://codyslexia.com",
   "private": true,
   "author": "Moa Torres",
   "license": "MIT",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-git",
+      "czConfig": "./scripts/commitizen.js"
+    }
+  },
   "dependencies": {},
   "devDependencies": {
+    "@nx/cypress": "^17.0.1",
+    "@nx/devkit": "^17.0.1",
+    "@nx/esbuild": "^17.0.1",
+    "@nx/eslint-plugin": "^17.0.1",
+    "@nx/jest": "^17.0.1",
     "@nx/js": "17.0.1",
+    "@nx/linter": "^17.0.1",
     "@nx/workspace": "17.0.1",
-    "nx": "17.0.1"
+    "cz-git": "^1.7.1",
+    "czg": "^1.7.1",
+    "husky": "^8.0.3",
+    "is-ci": "^3.0.1",
+    "nx": "17.0.1",
+    "prettier": "^2.6.2",
+    "pretty-quick": "^3.1.3"
   }
 }
