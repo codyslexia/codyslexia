@@ -1,0 +1,73 @@
+# Specifies which package ecosystems to update and where the package manifests are located.
+
+version: 2
+updates:
+  # Enable version updates for the JavaScript package.json manifest located in the root directory.
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      prefix: 'deps(npm): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the Rust Cargo.toml manifest located in the root directory.
+  - package-ecosystem: 'cargo'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      prefix: 'deps(cargo): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the Go go.mod manifest located in the root directory.
+  - package-ecosystem: 'gomod'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      prefix: 'deps(gomod): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the Python requirements.txt manifest located in the root directory.
+  - package-ecosystem: 'pip'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      prefix: 'deps(pip): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the Dockerfile manifest located in the root directory.
+  - package-ecosystem: 'docker'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      prefix: 'deps(docker): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the Terraform manifest located in the root directory.
+  - package-ecosystem: 'terraform'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      prefix: 'deps(terraform): '
+      include: scope
+      assignees:
+        - 'moatorres'
+
+  # Enable version updates for the GitHub Actions workflow manifest located in the root directory.
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      prefix: 'deps(github-actions): '
+      include: scope
+      assignees:
+        - 'moatorres'
