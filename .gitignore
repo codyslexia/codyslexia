@@ -1,14 +1,37 @@
-# See http://help.github.com/ignore-files/ for more about ignoring files.
+# 
+# .gitignore
+# use this file to ignore files and directories in git
+# see https://help.github.com/articles/ignoring-files
+# 
 
 # compiled output
 dist
 tmp
 /out-tsc
+/coverage
 
 # dependencies
 node_modules
+.nx/cache
+.yarn/cache
+.next/
 
-# IDEs and editors
+# dev
+.env
+
+# devcontainer
+.pnpm-store
+.nx/cache
+.cargo/.package-cache
+.cargo/bin/
+.cargo/env
+.cargo/registry/
+.local/
+.npm/
+.profile
+.rustup/
+
+# ide
 /.idea
 .project
 .classpath
@@ -17,7 +40,7 @@ node_modules
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+# vscode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -34,8 +57,7 @@ yarn-error.log
 testem.log
 /typings
 
-# System Files
+# system
 .DS_Store
 Thumbs.db
 
-.nx/cache
