@@ -1,17 +1,19 @@
-# 
-# .prettierignore
-# use this file to ignore files and folders from prettier
-# see https://prettier.io/docs/en/ignore.html
-# 
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
 
 # compiled output
 dist
 tmp
-/out-tsc
-/coverage
+out-tsc
+coverage
 
 # misc
 CODEOWNERS
-.vercelignore
-pnpm-lock.yaml
 .github/ISSUE_TEMPLATE/config.yaml
+.next
+.nx
+.vercelignore
+.yarn
+pnpm-lock.yaml
