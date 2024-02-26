@@ -20,6 +20,90 @@
               {
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "layer:backend",
+                "onlyDependOnLibsWithTags": ["layer:backend", "layer:server", "layer:isomorphic"]
+              },
+              {
+                "sourceTag": "layer:client",
+                "onlyDependOnLibsWithTags": ["layer:client", "layer:frontend", "layer:isomorphic"]
+              },
+              {
+                "sourceTag": "layer:frontend",
+                "onlyDependOnLibsWithTags": ["layer:frontend", "layer:client", "layer:isomorphic"]
+              },
+              {
+                "sourceTag": "layer:infra",
+                "notDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "layer:isomorphic",
+                "onlyDependOnLibsWithTags": ["layer:isomorphic"]
+              },
+              {
+                "sourceTag": "layer:other",
+                "notDependOnLibsWithTags": ["*"]
+              },
+              {
+                "sourceTag": "layer:server",
+                "onlyDependOnLibsWithTags": ["layer:server", "layer:backend", "layer:isomorphic"]
+              },
+              {
+                "sourceTag": "language:go",
+                "onlyDependOnLibsWithTags": ["language:go"]
+              },
+              {
+                "sourceTag": "language:python",
+                "onlyDependOnLibsWithTags": ["language:python"]
+              },
+              {
+                "sourceTag": "language:rust",
+                "onlyDependOnLibsWithTags": ["language:rust"]
+              },
+              {
+                "sourceTag": "language:javascript",
+                "onlyDependOnLibsWithTags": ["language:javascript", "language:typescript"]
+              },
+              {
+                "sourceTag": "language:typescript",
+                "onlyDependOnLibsWithTags": ["language:typescript", "language:javascript"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
+              },
+              {
+                "sourceTag": "scope:admin",
+                "onlyDependOnLibsWithTags": ["scope:admin", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:blog",
+                "onlyDependOnLibsWithTags": ["scope:blog", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:docs",
+                "onlyDependOnLibsWithTags": ["scope:docs", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:main",
+                "onlyDependOnLibsWithTags": ["scope:main", "scope:shared"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "type:data",
+                "onlyDependOnLibsWithTags": ["type:data", "type:util"]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": ["type:ui", "type:data", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:ui", "type:data", "type:util"]
               }
             ]
           }
