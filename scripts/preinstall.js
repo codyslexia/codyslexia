@@ -1,4 +1,11 @@
 /**
+ * Copyright (c) 2023-2024 Codyslexia
+ * @license MIT
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**
  * @fileoverview Pre-install script to check that the necessary dependencies are installed: Node 18+, Cargo
  * @module scripts/preinstall
  */
@@ -34,6 +41,16 @@ try {
 } catch {
   console.error(
     'Could not find Go. Please make sure that Go is installed. See https://go.dev/doc/install'
+  )
+  process.exit(1)
+}
+
+// check for python
+try {
+  childProcess.execSync('python3 --version')
+} catch {
+  console.error(
+    'Could not find Python3. Please make sure that Python3 is installed. See hhttps://www.python.org/downloads/'
   )
   process.exit(1)
 }
