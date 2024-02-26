@@ -1,20 +1,20 @@
-# 
-# .gitignore
-# use this file to ignore files and directories in git
-# see https://help.github.com/articles/ignoring-files
-# 
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
 
 # compiled output
 dist
 tmp
-/out-tsc
-/coverage
+out-tsc
+coverage
 
 # dependencies
 node_modules
 .nx/cache
 .yarn/cache
-.next/
+.next
+.tamagui
 
 # dev
 .env
@@ -23,9 +23,9 @@ node_modules
 .pnpm-store
 .nx/cache
 .cargo/.package-cache
-.cargo/bin/
+.cargo/bin
 .cargo/env
-.cargo/registry/
+.cargo/registry
 .local/
 .npm/
 .profile
@@ -61,3 +61,19 @@ testem.log
 .DS_Store
 Thumbs.db
 
+# expo
+.expo
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build
+cache
+
+# python
+.venv
+.tox
+__pycache__
