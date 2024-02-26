@@ -1,0 +1,48 @@
+# build and dependencies
+node_modules
+.cargo
+.devcontainer
+.docker
+.nx
+.storybook
+
+# linting and versioning
+.eslint*
+.git
+.github
+.husky
+.prettier
+commitlint*
+jest*
+
+# text editors
+.vscode
+
+# mobile and desktop apps
+.electron
+android
+
+# source code
+apps
+libs
+tools
+!apps/**/package.json
+
+# documentation
+changelog
+coverage
+documentation
+docs
+dist/apps/*-e2e
+
+# lambda functions
+functions
+!functions/package.json
+!functions/package-lock.json
+
+# configuration files
+nx.json
+tsconfig.base.json
+
+# adhoc
+*.log
