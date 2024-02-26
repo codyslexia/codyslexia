@@ -1,0 +1,19 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+# apply to all build targets
+[build]
+target-dir = 'dist/target'
+
+# apply to release builds only
+[target.x86_64-unknown-linux-musl]
+# disables the use of the C runtime library, which can result in smaller binary sizes and faster startup times
+rustflags = ["-C", "target-feature=-crt-static"]
+
+[target.aarch64-unknown-linux-musl]
+# necessary because the default linker may not be compatible with the target architecture
+linker = "aarch64-linux-musl-gcc"
+# disables the use of the C runtime library
+rustflags = ["-C", "target-feature=-crt-static"]
