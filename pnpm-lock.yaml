@@ -6,6 +6,7 @@ settings:
 
 overrides:
   axios@>=0.8.1 <1.6.0: '>=1.6.0'
+  semver@>=7.0.0 <7.5.2: '>=7.5.2'
 
 dependencies:
   '@apollo/server':
@@ -2558,7 +2559,7 @@ packages:
       node-fetch: 2.7.0
       parse-png: 2.1.0
       resolve-from: 5.0.0
-      semver: 7.3.2
+      semver: 7.6.0
       tempy: 0.3.0
     transitivePeerDependencies:
       - encoding
@@ -2575,7 +2576,7 @@ packages:
       node-fetch: 2.7.0
       parse-png: 2.1.0
       resolve-from: 5.0.0
-      semver: 7.3.2
+      semver: 7.6.0
       tempy: 0.3.0
     transitivePeerDependencies:
       - encoding
@@ -16625,11 +16626,6 @@ packages:
 
   /semver@6.3.1:
     resolution: {integrity: sha512-BR7VvDCVHO+q2xBEWskxS6DJE1qRnb7DxzUrogb71CWoSficBxYsiAGd+Kl0mmq/MprG9yArRkyrQxTO6XjMzA==}
-    hasBin: true
-
-  /semver@7.3.2:
-    resolution: {integrity: sha512-OrOb32TeeambH6UrhtShmF7CRDqhL6/5XpPNp2DuRH6+9QLw/orhp72j87v8Qa1ScDkvrrBNpZcDejAirJmfXQ==}
-    engines: {node: '>=10'}
     hasBin: true
 
   /semver@7.5.3:
