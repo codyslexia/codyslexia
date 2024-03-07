@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@backend/auth": ["libs/backend/auth/src/index.ts"],
+      "@codyslexia/colors": ["libs/packages/colors/src/index.ts"],
+      "@codyslexia/statejs": ["libs/packages/statejs/src/index.ts"],
+      "@plugins/golang": ["libs/plugins/golang/src/index.ts"],
+      "@plugins/graphql": ["libs/plugins/graphql/src/index.ts"],
+      "@plugins/python": ["libs/plugins/python/src/index.ts"],
+      "@plugins/rust": ["libs/plugins/rust/src/index.ts"],
+      "@plugins/workspace": ["libs/plugins/workspace/src/index.ts"],
+      "@shared/core": ["libs/shared/core/src/index.ts"],
+      "@shared/infra": ["libs/shared/infra/src/index.ts"],
+      "@shared/react": ["libs/shared/react/src/index.ts"],
+      "@shared/types": ["libs/shared/types/src/index.ts"],
+      "@shared/utils": ["libs/shared/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
