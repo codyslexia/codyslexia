@@ -1,0 +1,44 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+# This workflow will build a dev container image and push it to the GitHub Container Registry
+name: Pre-build dev container image
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - develop
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "pre-build-devcontainer-image"
+  pre-build-devcontainer-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Pre-build dev container image
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/codyslexia/devcontainer
+          cacheFrom: ghcr.io/codyslexia/devcontainer
+          push: always
+
+  # This workflow will run make ci-build in a dev container
+  make-ci-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run make ci-build in dev container
+        uses: devcontainers/ci@v0.3
+        with:
+          cacheFrom: ghcr.io/codyslexia/devcontainer
+          push: never
+          runCmd: make ci-build
