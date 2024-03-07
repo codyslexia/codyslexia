@@ -1,4 +1,4 @@
-# apps/backend/pythonapi
+# apps/backend/goapi
 
 <sub>⚡️ Powered by **OSS** — `< >` with ❤️ by [**Moa Torres**](https://github.com/moatorres)</sub>
 
