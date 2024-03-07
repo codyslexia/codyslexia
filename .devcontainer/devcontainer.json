@@ -1,34 +1,118 @@
-// For format details, see https://aka.ms/devcontainer.json.
+// to learn more about devcontainer @see https://aka.ms/devcontainer.json
 {
-  // For config options, see the https://github.com/devcontainers/templates/tree/main/src/typescript-node
-  "name": "CodyslexiaDevContainer",
-
-  // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:0-18",
+  "name": "Codyslexia",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "remoteUser": "root",
   "features": {
     "ghcr.io/devcontainers/features/go:1": {},
+    "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/rust:1": {},
-    "ghcr.io/devcontainers/features/python:1": {}
+    "ghcr.io/devcontainers/features/python:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {}
   },
-
-  // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [4200, 4211, 9229],
-
-  // Use 'postCreateCommand' to run commands after the container is created.
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4096",
+    "storage": "6gb"
+  },
+  "forwardPorts": [4200],
+  "portsAttributes": {
+    "4200": {
+      "label": "Frontend Client",
+      "onAutoForward": "notify"
+    }
+  },
   "postCreateCommand": "pnpm install",
+  "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
   "customizations": {
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
     "vscode": {
       "extensions": [
-        "nrwl.angular-console",
-        "esbenp.prettier-vscode",
+        // k8s
+        "ms-vscode.makefile-tools",
+        "ms-azuretools.vscode-docker",
         "ms-kubernetes-tools.vscode-kubernetes-tools",
+
+        // syntax support
+        "wholroyd.jinja",
+        "ms-python.python",
+        "redhat.vscode-yaml",
+        "mrmlnc.vscode-scss",
+        "unifiedjs.vscode-mdx",
+        "svelte.svelte-vscode",
+        "rust-lang.rust-analyzer",
+        "astro-build.astro-vscode",
+        "william-voyek.vscode-nginx",
+        "clinyong.vscode-css-modules",
+
+        // ide
         "GitHub.github-vscode-theme",
+        "PKief.material-icon-theme",
+
+        // format
+        "bodil.prettier-toml",
+        "esbenp.prettier-vscode",
+        "tamasfe.even-better-toml",
+        "raynigon.nginx-formatter",
+        "ahmadalli.vscode-nginx-conf",
+
+        // lint
+        "dbaeumer.vscode-eslint",
+
+        // tools
+        "vadimcn.vscode-lldb",
+        "nrwl.angular-console",
+        "mongodb.mongodb-vscode",
         "firsttris.vscode-jest-runner",
-        "dbaeumer.vscode-eslint"
-      ]
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "shd101wyy.markdown-preview-enhanced"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "[astro]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[go]": {
+          "editor.insertSpaces": false,
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+          },
+          "editor.defaultFormatter": "golang.go"
+        },
+        "[nginx]": {
+          "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
+        },
+        "[python]": {
+          "editor.formatOnType": true,
+          "editor.defaultFormatter": "ms-python.autopep8"
+        },
+        "[rust]": {
+          "editor.defaultFormatter": "rust-lang.rust-analyzer",
+          "editor.formatOnSave": true
+        },
+        "[scss]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[svelte]": {
+          "editor.defaultFormatter": "svelte.svelte-vscode"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[toml]": {
+          "editor.defaultFormatter": "tamasfe.even-better-toml"
+        }
+      }
     }
   }
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  // "remoteUser": "root"
 }
