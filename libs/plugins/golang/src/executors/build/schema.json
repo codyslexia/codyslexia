@@ -1,0 +1,36 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "https://json-schema.org/schema",
+  "title": "@plugins/golang:build",
+  "description": "Go build options",
+  "type": "object",
+  "properties": {
+    "main": {
+      "type": "string",
+      "description": "Path to the file containing the main() function",
+      "x-completion-type": "file",
+      "x-completion-glob": "main.go",
+      "x-priority": "important"
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "The output path of the resulting executable"
+    },
+    "env": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Environment variables to set when running the executor"
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Flags to pass to the go compiler"
+    }
+  },
+  "required": ["main"]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "@plugins/golang/convert-to-one-mod",
+  "title": "Codyslexia Go Plugin generator convert-to-one-mod options",
+  "type": "object",
+  "properties": {
+    "skipFormat": {
+      "type": "boolean",
+      "description": "Skip formatting files.",
+      "default": false,
+      "x-priority": "internal"
+    }
+  }
+}

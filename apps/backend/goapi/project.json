@@ -1,0 +1,41 @@
+{
+  "name": "goapi",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/backend/goapi/src",
+  "tags": ["lang:go", "layer:backend", "scope:accounts"],
+  "targets": {
+    "build": {
+      "executor": "@plugins/golang:build",
+      "options": {
+        "main": "{projectRoot}/src/main.go"
+      }
+    },
+    "lint": {
+      "executor": "@plugins/golang:lint",
+      "cache": true
+    },
+    "serve": {
+      "executor": "@plugins/golang:serve",
+      "options": {
+        "main": "{projectRoot}/src/main.go"
+      }
+    },
+    "test": {
+      "executor": "@plugins/golang:test",
+      "cache": true
+    },
+    "docker": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "build": {
+          "cwd": "{projectRoot}",
+          "command": "docker build -t goapi ."
+        },
+        "run": {
+          "command": ""
+        }
+      }
+    }
+  }
+}
