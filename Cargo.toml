@@ -1,8 +1,5 @@
-
 [workspace]
-members = [
-	'apps/accounts/rustapi',
-]
+members = ['apps/backend/rustapi']
 resolver = '2'
 
 [profile.release]

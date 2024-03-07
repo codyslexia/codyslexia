@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "CreateNapiNpmDirs",
+  "title": "",
+  "type": "object",
+  "properties": {
+    "project": {
+      "description": "The name of the project",
+      "$default": {
+        "$source": "projectName",
+        "index": 0
+      }
+    }
+  },
+  "required": []
+}
