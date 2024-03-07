@@ -1,0 +1,74 @@
+{
+  "name": "pythonapi",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/backend/pythonapi/pythonapi",
+  "targets": {
+    "build": {
+      "executor": "@plugins/python:build",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/backend/pythonapi",
+        "publish": false,
+        "lockedVersions": true,
+        "bundleLocalDependencies": true
+      }
+    },
+    "lint": {
+      "cache": true,
+      "executor": "@plugins/python:ruff-check",
+      "outputs": [],
+      "options": {
+        "lintFilePatterns": ["pythonapi", "tests"]
+      }
+    },
+    "serve": {
+      "executor": "@plugins/python:run-commands",
+      "options": {
+        "command": "flask --app {projectRoot}/pythonapi/main.py --debug run --port 8002"
+      }
+    },
+    "test": {
+      "cache": true,
+      "executor": "@plugins/python:run-commands",
+      "outputs": [
+        "{workspaceRoot}/reports/apps/backend/pythonapi/unittests",
+        "{workspaceRoot}/coverage/apps/backend/pythonapi"
+      ],
+      "options": {
+        "command": "poetry run pytest tests/",
+        "cwd": "apps/backend/pythonapi"
+      }
+    },
+    "lock": {
+      "executor": "@plugins/python:run-commands",
+      "options": {
+        "command": "poetry lock --no-update",
+        "cwd": "apps/backend/pythonapi"
+      }
+    },
+    "add": {
+      "executor": "@plugins/python:add",
+      "options": {}
+    },
+    "update": {
+      "executor": "@plugins/python:update",
+      "options": {}
+    },
+    "remove": {
+      "executor": "@plugins/python:remove",
+      "options": {}
+    },
+    "install": {
+      "executor": "@plugins/python:install",
+      "options": {
+        "silent": false,
+        "args": "",
+        "cacheDir": ".cache/pypoetry",
+        "verbose": false,
+        "debug": false
+      }
+    }
+  },
+  "tags": []
+}
