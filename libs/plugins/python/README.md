@@ -1,11 +1,5 @@
-# python
+# @plugins/python
 
-This library was generated with [Nx](https://nx.dev).
+<sub>⚡️ Powered by **OSS** — `< >` with ❤️ by [**Moa Torres**](https://github.com/moatorres)</sub>
 
-## Building
-
-Run `nx build python` to build the library.
-
-## Running unit tests
-
-Run `nx test python` to execute the unit tests via [Jest](https://jestjs.io).
+<sub>NOTE: **Codyslexia** is an unregistered trademark. All rights reserved.</sub>
