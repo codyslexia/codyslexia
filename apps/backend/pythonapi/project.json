@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/backend/pythonapi/pythonapi",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@plugins/python:build",
@@ -69,6 +70,5 @@
         "debug": false
       }
     }
-  },
-  "tags": []
+  }
 }

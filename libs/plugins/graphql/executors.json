@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "codegen": {
+      "implementation": "./src/executors/codegen/executor",
+      "schema": "./src/executors/codegen/schema.json",
+      "description": "The codegen command generates the data types corresponding to the graphql schema"
+    }
+  }
+}

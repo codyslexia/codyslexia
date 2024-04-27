@@ -1,0 +1,78 @@
+{
+  "name": "totp-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/totp-api/src",
+  "projectType": "application",
+  "tags": ["language:typescript", "layer:backend"],
+  "targets": {
+    "docker": {
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
+      "dependsOn": ["build"],
+      "options": {
+        "outputPath": "dist/apps/services/totp-api"
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/services/totp-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/services/totp-api/src/main.ts",
+        "tsConfig": "apps/services/totp-api/tsconfig.app.json",
+        "assets": ["apps/services/totp-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "totp-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "totp-api:build:development"
+        },
+        "production": {
+          "buildTarget": "totp-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}

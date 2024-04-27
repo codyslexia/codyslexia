@@ -1,0 +1,15 @@
+{
+  "name": "@codyslexia/colors",
+  "version": "0.0.1",
+  "description": "Color utilities for Node.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codyslexia/codyslexia.git",
+    "directory": "packages/colors"
+  },
+  "dependencies": {},
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts"
+}

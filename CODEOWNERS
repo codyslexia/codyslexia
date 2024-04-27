@@ -1,0 +1,36 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+# if not covered below, default to @moatorres
+* @moatorres
+/e2e/**/* @moatorres
+/plugins/**/* @moatorres
+/scripts/**/* @moatorres
+/tools/**/* @moatorres
+/apps/**/* @moatorres @codyslexia/core
+/libs/**/* @moatorres @codyslexia/core
+package.json @codyslexia/core
+pnpm-lock.yaml @codyslexia/core
+
+# docs
+/docs @codyslexia/docs
+
+# scripts
+/scripts/* @codyslexia/pipelines @moatorres
+
+# ci
+/.circleci/** @codyslexia/pipelines
+/.github/** @codyslexia/pipelines
+/.husky/** @codyslexia/pipelines
+
+# misc
+/CONTRIBUTING.md @moatorres
+/CODE_OF_CONDUCT.md @moatorres
+/CODEOWNERS @moatorres
+
+# global config files
+project.json @moatorres
+jest.config.ts @moatorres
+jest.preset.js @moatorres

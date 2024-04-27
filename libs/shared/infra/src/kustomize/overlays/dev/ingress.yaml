@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-ingress
+  namespace: dev
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer
+    # nginx.ingress.kubernetes.io/proxy-body-size: '2g'
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - local.dev
+      secretName: api-dev-tls
+  rules:
+    - host: local.dev
+      http: &http_rules
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: faker-api
+                port:
+                  number: 80
+          - path: /totp
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: totp-api
+                port:
+                  number: 80

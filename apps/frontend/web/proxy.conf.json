@@ -1,0 +1,22 @@
+{
+  "/api/faker": {
+    "target": "http://localhost:3001",
+    "secure": false
+  },
+  "/api/qrcode": {
+    "target": "http://localhost:3002",
+    "secure": false
+  },
+  "/auth/totp": {
+    "target": "http://localhost:3003",
+    "secure": false
+  },
+  "/auth/webauthn": {
+    "target": "http://localhost:3004",
+    "secure": false
+  },
+  "/graphql": {
+    "target": "http://localhost:4000",
+    "secure": false
+  }
+}

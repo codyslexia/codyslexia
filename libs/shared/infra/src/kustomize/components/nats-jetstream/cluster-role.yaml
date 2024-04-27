@@ -1,0 +1,34 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nats-server
+  labels:
+    app: codyslexia
+    component: nats-jetstream
+rules:
+  - apiGroups: ['']
+    resources:
+      - nodes
+    verbs: ['get']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: nats-server-binding
+  labels:
+    app: codyslexia
+    component: nats-jetstream
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: nats-server
+subjects:
+  - kind: ServiceAccount
+    name: nats-server
+    namespace: default

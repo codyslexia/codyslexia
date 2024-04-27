@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "eslint.validate": ["json"]
+  "eslint.validate": ["json"],
+  "cmake.configureOnOpen": false,
+  "java.compile.nullAnalysis.mode": "automatic"
 }

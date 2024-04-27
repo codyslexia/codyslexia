@@ -1,0 +1,100 @@
+[
+  {
+    "value": 100,
+    "description": "Continue",
+    "reference": "RFC9110, Section 15.2.1",
+    "tags": ["informational"],
+    "info": "Use to inform that  an initial part of the request has been received and the client should proceed with the request or ignore the response."
+  },
+  {
+    "value": 101,
+    "description": "Switching Protocols",
+    "reference": "RFC9110, Section 15.2.2",
+    "tags": ["informational"],
+    "info": "Use to inform that the server understands the `Upgrade` header field request and indicates which protocol it is switching to."
+  },
+  {
+    "value": 102,
+    "description": "Processing",
+    "reference": "RFC2518",
+    "tags": ["informational"],
+    "info": "Use to inform that the server has accepted the full request but has not yet completed it and no response is available as of yet."
+  },
+  {
+    "value": 103,
+    "description": "Early Hints",
+    "reference": "RFC8297",
+    "tags": ["informational"],
+    "info": "Use to allow the user agent to preload resources, while we prepare a response. It is intended to be primarily used with the Link Header."
+  },
+  {
+    "value": 200,
+    "description": "OK",
+    "reference": "RFC9110, Section 15.3.1",
+    "tags": ["successful"],
+    "info": "Use to inform that the request was successful."
+  },
+  {
+    "value": 201,
+    "description": "Created",
+    "reference": "RFC9110, Section 15.3.2",
+    "tags": ["successful"],
+    "info": "Use to inform that the request was successful and resulted in one or more resources being created."
+  },
+  {
+    "value": 202,
+    "description": "Accepted",
+    "reference": "RFC9110, Section 15.3.3",
+    "tags": ["successful"],
+    "info": "Use to inform that the request has been accepted for processing but the may or may not be completed when the processing finishes."
+  },
+  {
+    "value": 203,
+    "description": "Non Authoritative Information",
+    "reference": "RFC9110, Section 15.3.4",
+    "tags": ["successful"],
+    "info": "Use to inform that the request was successful. However, the meta-information that has been received is different from the one on the origin server. When not used for backups or mirrors of another resource a '200' OK response is preferable. "
+  },
+  {
+    "value": 204,
+    "description": "No Content",
+    "reference": "RFC9110, Section 15.3.5",
+    "tags": ["successful"],
+    "info": "Use to inform that the request was successfully fulfilled the request, and there is no available content for this request."
+  },
+  {
+    "value": 205,
+    "description": "Reset Content",
+    "reference": "RFC9110, Section 15.3.6",
+    "tags": ["successful"],
+    "info": "Use to inform that the user should reset the document that sent this request."
+  },
+  {
+    "value": 206,
+    "description": "Partial Content",
+    "reference": "RFC9110, Section 15.3.7",
+    "tags": ["successful"],
+    "info": "Use in response to a `Range` header sent from the client that's requesting only a part of the resource."
+  },
+  {
+    "value": 207,
+    "description": "Multi-Status",
+    "reference": "RFC4918",
+    "tags": ["successful"],
+    "info": "Use to convey information about multiple resources when multiple status codes are appropriate."
+  },
+  {
+    "value": 208,
+    "description": "Already Reported",
+    "reference": "RFC5842",
+    "tags": ["successful"],
+    "info": "Use inside the response element 'DAV: _propstat_', in order to avoid enumerating the internal members of multiple bindings to the same collection repeatedly."
+  },
+  {
+    "value": 226,
+    "description": "IM Used",
+    "reference": "RFC3229",
+    "tags": ["successful"],
+    "info": "Use to inform that the server has successfully fulfilled a `GET` request, and the response is a representation of the result of one or multiple instance-manipulations applied to the current instance."
+  }
+]

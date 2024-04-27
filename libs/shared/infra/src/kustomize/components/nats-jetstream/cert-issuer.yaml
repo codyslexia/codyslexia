@@ -1,0 +1,16 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: nats-cert-issuer
+  labels:
+    app: codyslexia
+    component: nats-cert-issuer
+spec:
+  ca:
+    secretName: nats-cert-authority-secret

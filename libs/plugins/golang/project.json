@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/plugins/golang/src",
   "projectType": "library",
+  "tags": ["language:typescript", "layer:isomorphic", "scope:shared", "type:tool"],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -47,6 +48,5 @@
         "jestConfig": "{projectRoot}/jest.config.ts"
       }
     }
-  },
-  "tags": ["language:typescript", "layer:isomorphic", "scope:shared", "type:tool"]
+  }
 }

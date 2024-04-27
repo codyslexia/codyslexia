@@ -24,6 +24,7 @@
       "@plugins/python": ["libs/plugins/python/src/index.ts"],
       "@plugins/rust": ["libs/plugins/rust/src/index.ts"],
       "@plugins/workspace": ["libs/plugins/workspace/src/index.ts"],
+      "@plugins/zig": ["libs/plugins/zig/src/index.ts"],
       "@shared/core": ["libs/shared/core/src/index.ts"],
       "@shared/infra": ["libs/shared/infra/src/index.ts"],
       "@shared/react": ["libs/shared/react/src/index.ts"],

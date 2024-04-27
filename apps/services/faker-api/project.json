@@ -1,0 +1,75 @@
+{
+  "name": "faker-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/faker-api/src",
+  "projectType": "application",
+  "tags": ["language:typescript", "layer:backend"],
+  "targets": {
+    "docker": {
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
+      "dependsOn": ["^build"],
+      "options": {
+        "outputPath": "dist/apps/services/faker-api"
+      }
+    },
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/services/faker-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/services/faker-api/src/main.ts",
+        "tsConfig": "apps/services/faker-api/tsconfig.app.json",
+        "assets": ["apps/services/faker-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "faker-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "faker-api:build:development"
+        },
+        "production": {
+          "buildTarget": "faker-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/plugins/rust/src",
   "projectType": "library",
+  "tags": ["language:typescript", "layer:isomorphic", "scope:workspace", "type:tool"],
   "targets": {
     "build": {
       "executor": "@nx/js:tsc",
@@ -43,6 +44,5 @@
         "jestConfig": "{projectRoot}/jest.config.ts"
       }
     }
-  },
-  "tags": ["language:typescript", "layer:isomorphic", "scope:workspace", "type:tool"]
+  }
 }

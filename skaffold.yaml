@@ -1,0 +1,81 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta5
+kind: Config
+
+metadata:
+  name: codyslexia
+
+requires:
+  - configs: ['cert-manager']
+    path: libs/shared/infra/src/helm/cert-manager/skaffold.yaml
+  - configs: ['mongodb-operator']
+    path: libs/shared/infra/src/helm/mongodb-operator/skaffold.yaml
+  - configs: ['nats-jetstream']
+    path: libs/shared/infra/src/helm/nats-jetstream/skaffold.yaml
+  - configs: ['nginx-controller']
+    path: libs/shared/infra/src/helm/nginx-controller/skaffold.yaml
+  - configs: ['vault']
+    path: libs/shared/infra/src/helm/vault/skaffold.yaml
+  - configs: ['prometheus-operator']
+    path: libs/shared/infra/src/helm/prometheus-operator/skaffold.yaml
+  - configs: ['redis']
+    path: libs/shared/infra/src/helm/redis.yaml
+  # - configs: ['stackgres']
+  #   path: libs/shared/infra/src/helm/stackgres.yaml
+
+# build:
+#   local:
+#     concurrency: 1
+#     push: false
+#     useDockerCLI: true
+#   artifacts:
+#     - image: ghcr.io/codyslexia/faker-api
+#       platforms: ['linux/amd64']
+#       docker:
+#         dockerfile: apps/services/faker-api/Dockerfile
+#   tagPolicy:
+#     sha256: {}
+
+deploy:
+  kubeContext: docker-desktop
+  kubectl:
+    defaultNamespace: dev
+    remoteManifests:
+      - libs/shared/infra/src/kustomize/overlays/dev
+  helm: {}
+
+manifests:
+  rawYaml:
+    # - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/cloud/deploy.yaml
+    - apps/services/faker-api/k8s.yaml
+    - apps/services/totp-api/k8s.yaml
+  kustomize:
+    buildArgs: []
+    paths:
+      - libs/shared/infra/src/kustomize/overlays/dev
+
+profiles:
+  - name: dev
+    activation:
+      - command: dev
+      - kubeContext: docker-desktop
+
+    requiresAllActivations: true
+
+    manifests:
+      kustomize:
+        buildArgs: []
+        paths:
+          - libs/shared/infra/src/kustomize/overlays/dev
+    deploy:
+      kubeContext: docker-desktop
+      kubectl:
+        defaultNamespace: dev
+        remoteManifests:
+          - libs/shared/infra/src/kustomize/overlays/dev
+      helm: {}

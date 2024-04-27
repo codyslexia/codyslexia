@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/backend/rustapi/src",
+  "tags": ["language:typescript", "layer:backend", "scope:accounts"],
   "targets": {
     "build": {
       "executor": "@plugins/rust:build",
@@ -49,6 +50,5 @@
         }
       }
     }
-  },
-  "tags": ["language:typescript", "layer:backend", "scope:accounts"]
+  }
 }

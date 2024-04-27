@@ -132,7 +132,7 @@ dev = ["black", "flake8", "pre-commit"]
 [[package]]
 name = "pythonapi"
 version = "1.0.0"
-description = "Simple Python API"
+description = "A simple Python API example."
 optional = false
 python-versions = ">=3.9,<3.11"
 files = []
@@ -196,4 +196,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.11"
-content-hash = "3827561137fcd5f28c615dd65d30556d7c6cf224ce3d97a7a16ba42f9f2f55b8"
+content-hash = "f1f1037cfaf7afa9b3a0fd3eaabfd873c99aba6dd8a52877172382031e9e2a65"

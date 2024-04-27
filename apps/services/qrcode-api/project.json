@@ -1,0 +1,68 @@
+{
+  "name": "qrcode-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/services/qrcode-api/src",
+  "projectType": "application",
+  "tags": ["language:typescript", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/services/qrcode-api",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/services/qrcode-api/src/main.ts",
+        "tsConfig": "apps/services/qrcode-api/tsconfig.app.json",
+        "assets": ["apps/services/qrcode-api/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "generateLockfile": true,
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "qrcode-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "qrcode-api:build:development"
+        },
+        "production": {
+          "buildTarget": "qrcode-api:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/services/qrcode-api/Dockerfile . -t api-qrcode"
+    }
+  }
+}

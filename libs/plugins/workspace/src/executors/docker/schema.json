@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "Docker Build Target",
+  "description": "Docker Build Target.",
+  "type": "object",
+  "properties": {
+    "imageName": {
+      "type": "string"
+    },
+    "organisation": {
+      "type": "string"
+    },
+    "outputPath": {
+      "type": "string"
+    },
+    "registry": {
+      "type": "string"
+    },
+    "sourceRoot": {
+      "type": "string"
+    }
+  },
+  "required": ["outputPath"]
+}

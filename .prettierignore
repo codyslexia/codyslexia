@@ -17,3 +17,5 @@ CODEOWNERS
 .vercelignore
 .yarn
 pnpm-lock.yaml
+
+/.nx/cache

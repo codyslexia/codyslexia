@@ -8,7 +8,7 @@ describe('Npm bridge', () => {
   describe('Method: getProjectScope', () => {
     it('should return project scope', () => {
       jest.spyOn(nxDevkit, 'readJson').mockReturnValueOnce({ name: '@plugins/golang' })
-      expect(getProjectScope(createTreeWithEmptyWorkspace())).toBe('@plugins/golang')
+      expect(getProjectScope(createTreeWithEmptyWorkspace())).toBe('plugins')
     })
   })
 })

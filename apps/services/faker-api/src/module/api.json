@@ -1,0 +1,348 @@
+[
+  {
+    "module": "random",
+    "options": {
+      "word": null,
+      "words": null,
+      "locale": null,
+      "alpha": null,
+      "alphaNumeric": null,
+      "numeric": null
+    }
+  },
+  {
+    "module": "datatype",
+    "options": {
+      "number": null,
+      "float": null,
+      "datetime": null,
+      "string": null,
+      "uuid": null,
+      "boolean": null,
+      "hexadecimal": null,
+      "json": null,
+      "array": null,
+      "bigInt": null
+    }
+  },
+  {
+    "module": "address",
+    "options": {
+      "zipCode": null,
+      "zipCodeByState": null,
+      "city": null,
+      "cityPrefix": null,
+      "citySuffix": null,
+      "cityName": null,
+      "buildingNumber": null,
+      "street": null,
+      "streetName": null,
+      "streetAddress": null,
+      "streetSuffix": null,
+      "streetPrefix": null,
+      "secondaryAddress": null,
+      "county": null,
+      "country": null,
+      "countryCode": null,
+      "state": null,
+      "stateAbbr": null,
+      "latitude": null,
+      "longitude": null,
+      "direction": null,
+      "cardinalDirection": null,
+      "ordinalDirection": null,
+      "nearbyGPSCoordinate": null,
+      "timeZone": null
+    }
+  },
+  {
+    "module": "animal",
+    "options": {
+      "dog": null,
+      "cat": null,
+      "snake": null,
+      "bear": null,
+      "lion": null,
+      "cetacean": null,
+      "horse": null,
+      "bird": null,
+      "cow": null,
+      "fish": null,
+      "crocodilia": null,
+      "insect": null,
+      "rabbit": null,
+      "rodent": null,
+      "type": null
+    }
+  },
+  {
+    "module": "color",
+    "options": {
+      "human": null,
+      "space": null,
+      "cssSupportedFunction": null,
+      "cssSupportedSpace": null,
+      "rgb": null,
+      "cmyk": null,
+      "hsl": null,
+      "hwb": null,
+      "lab": null,
+      "lch": null,
+      "colorByCSSColorSpace": null
+    }
+  },
+  {
+    "module": "commerce",
+    "options": {
+      "color": null,
+      "department": null,
+      "productName": null,
+      "price": null,
+      "productAdjective": null,
+      "productMaterial": null,
+      "product": null,
+      "productDescription": null
+    }
+  },
+  {
+    "module": "company",
+    "options": {
+      "suffixes": null,
+      "name": null,
+      "companyName": null,
+      "companySuffix": null,
+      "catchPhrase": null,
+      "bs": null,
+      "catchPhraseAdjective": null,
+      "catchPhraseDescriptor": null,
+      "catchPhraseNoun": null,
+      "bsAdjective": null,
+      "bsBuzz": null,
+      "bsNoun": null
+    }
+  },
+  {
+    "module": "database",
+    "options": {
+      "column": null,
+      "type": null,
+      "collation": null,
+      "engine": null,
+      "mongodbObjectId": null
+    }
+  },
+  {
+    "module": "date",
+    "options": {
+      "past": null,
+      "future": null,
+      "between": null,
+      "betweens": null,
+      "recent": null,
+      "soon": null,
+      "month": null,
+      "weekday": null,
+      "birthdate": null
+    }
+  },
+  {
+    "module": "finance",
+    "options": {
+      "account": null,
+      "accountName": null,
+      "routingNumber": null,
+      "mask": null,
+      "amount": null,
+      "transactionType": null,
+      "currencyCode": null,
+      "currencyName": null,
+      "currencySymbol": null,
+      "bitcoinAddress": null,
+      "litecoinAddress": null,
+      "creditCardNumber": null,
+      "creditCardCVV": null,
+      "creditCardIssuer": null,
+      "pin": null,
+      "ethereumAddress": null,
+      "iban": null,
+      "bic": null,
+      "transactionDescription": null
+    }
+  },
+  {
+    "module": "git",
+    "options": {
+      "branch": null,
+      "commitEntry": null,
+      "commitMessage": null,
+      "commitSha": null,
+      "shortSha": null
+    }
+  },
+  {
+    "module": "hacker",
+    "options": {
+      "abbreviation": null,
+      "adjective": null,
+      "noun": null,
+      "verb": null,
+      "ingverb": null,
+      "phrase": null
+    }
+  },
+  {
+    "module": "image",
+    "options": {
+      "image": null,
+      "avatar": null,
+      "imageUrl": null,
+      "abstract": null,
+      "animals": null,
+      "business": null,
+      "cats": null,
+      "city": null,
+      "food": null,
+      "nightlife": null,
+      "fashion": null,
+      "people": null,
+      "nature": null,
+      "sports": null,
+      "technics": null,
+      "transport": null,
+      "dataUri": null,
+      "lorempixel": { "faker": null },
+      "unsplash": { "faker": null },
+      "lorempicsum": { "faker": null },
+      "placeholder": {
+        "faker": null,
+        "imageUrl": null,
+        "randomUrl": null
+      }
+    }
+  },
+  {
+    "module": "internet",
+    "options": {
+      "avatar": null,
+      "email": null,
+      "exampleEmail": null,
+      "userName": null,
+      "protocol": null,
+      "httpMethod": null,
+      "httpStatusCode": null,
+      "url": null,
+      "domainName": null,
+      "domainSuffix": null,
+      "domainWord": null,
+      "ip": null,
+      "ipv4": null,
+      "ipv6": null,
+      "port": null,
+      "userAgent": null,
+      "color": null,
+      "mac": null,
+      "password": null,
+      "emoji": null
+    }
+  },
+  {
+    "module": "lorem",
+    "options": {
+      "word": null,
+      "words": null,
+      "sentence": null,
+      "slug": null,
+      "sentences": null,
+      "paragraph": null,
+      "paragraphs": null,
+      "text": null,
+      "lines": null
+    }
+  },
+  {
+    "module": "music",
+    "options": {
+      "genre": null,
+      "songName": null
+    }
+  },
+  {
+    "module": "name",
+    "options": {
+      "firstName": null,
+      "lastName": null,
+      "middleName": null,
+      "findName": null,
+      "fullName": null,
+      "gender": null,
+      "sex": null,
+      "sexType": null,
+      "prefix": null,
+      "suffix": null,
+      "jobTitle": null,
+      "jobDescriptor": null,
+      "jobArea": null,
+      "jobType": null
+    }
+  },
+  {
+    "module": "phone",
+    "options": {
+      "phoneNumber": null,
+      "number": null,
+      "phoneNumberFormat": null,
+      "phoneFormats": null,
+      "imei": null
+    }
+  },
+  {
+    "module": "science",
+    "options": {
+      "chemicalElement": null,
+      "unit": null
+    }
+  },
+  {
+    "module": "system",
+    "options": {
+      "fileName": null,
+      "commonFileName": null,
+      "mimeType": null,
+      "commonFileType": null,
+      "commonFileExt": null,
+      "fileType": null,
+      "fileExt": null,
+      "directoryPath": null,
+      "filePath": null,
+      "semver": null,
+      "networkInterface": null,
+      "cron": null
+    }
+  },
+  {
+    "module": "vehicle",
+    "options": {
+      "vehicle": null,
+      "manufacturer": null,
+      "model": null,
+      "type": null,
+      "fuel": null,
+      "vin": null,
+      "color": null,
+      "vrm": null,
+      "bicycle": null
+    }
+  },
+  {
+    "module": "word",
+    "options": {
+      "adjective": null,
+      "adverb": null,
+      "conjunction": null,
+      "interjection": null,
+      "noun": null,
+      "preposition": null,
+      "verb": null
+    }
+  }
+]

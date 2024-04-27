@@ -1,0 +1,29 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: vault
+deploy:
+  helm:
+    releases:
+      - name: vault
+        namespace: dev
+        remoteChart: hashicorp/vault
+        setValues:
+          server.dev.enabled: true
+#
+#
+# POD_NAME=$(kubectl get pods -n dev -l "faker-api" -o jsonpath="{.items[0].metadata.name}")
+#
+# kubectl port-forward "$POD_NAME" 8443:9443 --namespace dev
+#
+# kubectl get secret -n dev stackgres-restapi-admin --template '{{ printf "username = %s\n" (.data.k8sUsername | base64decode) }}'
+#
+# kubectl get secret -n dev stackgres-restapi-admin --template '{{ printf "password = %s\n" (.data.clearPassword | base64decode) }}'
+#
+#

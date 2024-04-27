@@ -1,0 +1,71 @@
+{
+  "name": "@codyslexia/colors",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/packages/colors/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:util"],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "main": "libs/packages/colors/src/index.ts",
+        "project": "libs/packages/colors/package.json",
+        "tsConfig": "libs/packages/colors/tsconfig.lib.json",
+        "outputPath": "dist/libs/packages/colors",
+        "compiler": "babel",
+        "format": ["esm", "cjs"],
+        "external": ["react/jsx-runtime"],
+        "generateExportsField": true,
+        "assets": [
+          {
+            "glob": "libs/packages/colors/README.md",
+            "input": ".",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "esbuild": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "libs/packages/colors/src/index.ts",
+        "format": ["esm", "cjs"],
+        "outputPath": "dist/libs/packages/colors",
+        "outputFileName": "main.js",
+        "tsConfig": "libs/packages/colors/tsconfig.lib.json",
+        "project": "libs/packages/colors/package.json",
+        "assets": ["libs/packages/colors/*.md", "LICENSE"],
+        "platform": "node"
+      },
+      "configurations": {
+        "development": {
+          "minify": false,
+          "metafile": true,
+          "esbuildOptions": {
+            "sourcemap": true
+          }
+        },
+        "production": {
+          "minify": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@plugins/workspace",
+  "version": "0.0.1",
+  "description": "Codyslexia workspace plugin.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codyslexia/codyslexia.git",
+    "directory": "libs/plugins/workspace"
+  },
+  "dependencies": {
+    "@nx/devkit": "18.2.1",
+    "tslib": "^2.3.0"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "executors": "./executors.json",
+  "generators": "./generators.json"
+}

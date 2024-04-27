@@ -1,0 +1,23 @@
+{
+  "name": "@plugins/graphql",
+  "version": "0.0.1",
+  "description": "Codyslexia GraphQL Plugin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codyslexia/codyslexia.git",
+    "directory": "libs/plugins/graphql"
+  },
+  "dependencies": {
+    "@actions/exec": "^1.1.1",
+    "@nx/devkit": "18.2.1",
+    "chalk": "4.1.2",
+    "ci-info": "^4.0.0",
+    "tslib": "^2.3.0"
+  },
+  "type": "commonjs",
+  "main": "./src/index.js",
+  "typings": "./src/index.d.ts",
+  "generators": "./generators.json",
+  "executors": "./executors.json"
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "cli": "nx",
+  "$id": "update-tags",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the project to add tags to.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What is the name of the project?",
+      "pattern": "^[a-zA-Z].*$"
+    },
+    "scope": {
+      "description": "The scope of the project to update.",
+      "type": "string",
+      "x-prompt": {
+        "message": "What is the scope of the project?",
+        "type": "list",
+        "items": [
+          { "value": "backend", "label": "backend" },
+          { "value": "frontend", "label": "frontend" },
+          { "value": "shared", "label": "shared" }
+        ]
+      }
+    },
+    "tags": {
+      "type": "string",
+      "description": "Tags to add to the project.",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What tags would you like to add?",
+      "pattern": "([a-z]+:[a-z]+)([,]*)"
+    }
+  },
+  "required": ["scope", "name", "tags"]
+}

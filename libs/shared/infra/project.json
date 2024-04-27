@@ -1,0 +1,63 @@
+{
+  "name": "shared-infra",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/infra/src",
+  "projectType": "library",
+  "tags": ["language:typescript", "layer:isomorphic", "scope:shared", "type:infra"],
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "args": [],
+        "commands": [
+          {
+            "command": "nx serve goapi",
+            "color": "yellow"
+          },
+          {
+            "command": "nx serve pythonapi",
+            "color": "yellow"
+          },
+          {
+            "command": "nx serve rustapi",
+            "color": "yellow"
+          },
+          {
+            "command": "nx serve project-api"
+          },
+          {
+            "command": "nx serve project-subgraph"
+          },
+          {
+            "command": "nx serve totp-api"
+          },
+          {
+            "command": "nx serve faker-api"
+          }
+        ],
+        "parallel": true
+      }
+    },
+    "terraform": {
+      "executor": "nx:run-commands",
+      "configurations": {
+        "init": {
+          "command": "terraform init",
+          "cwd": "{projectRoot}/src/terraform/gcp"
+        },
+        "plan": {
+          "command": "terraform plan",
+          "cwd": "{projectRoot}/src/terraform/gcp"
+        },
+        "apply": {
+          "command": "terraform apply",
+          "cwd": "{projectRoot}/src/terraform/gcp"
+        },
+        "destroy": {
+          "command": "terraform destroy",
+          "cwd": "{projectRoot}/src/terraform/gcp"
+        }
+      }
+    }
+  }
+}

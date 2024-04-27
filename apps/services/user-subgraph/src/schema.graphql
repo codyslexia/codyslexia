@@ -1,0 +1,29 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"]) {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+  "Get the currently logged in user"
+  me: User
+  "Get all users (admin only)"
+  users: [User]
+}
+
+type Mutation {
+  "Login as a user"
+  login(email: String): User
+  "Create a new user"
+  createUser(email: String): User
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  "The user's email address"
+  email: String
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "executors": {
+    "docker": {
+      "implementation": "./src/executors/docker/executor",
+      "schema": "./src/executors/docker/schema.json",
+      "description": "Build a Docker image for a Node.js application"
+    }
+  }
+}

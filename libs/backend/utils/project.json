@@ -1,0 +1,15 @@
+{
+  "name": "utils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/backend/utils",
+  "tags": [],
+  "targets": {
+    "test": {
+      "executor": "@plugins/golang:test"
+    },
+    "lint": {
+      "executor": "@plugins/golang:lint"
+    }
+  }
+}

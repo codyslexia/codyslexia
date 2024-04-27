@@ -1,0 +1,43 @@
+{
+  "name": "@shared/react",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/react/src",
+  "projectType": "library",
+  "tags": ["language:typescript", "layer:frontend", "scope:shared", "type:util"],
+  "targets": {
+    "build": {
+      "executor": "@nx/rollup:rollup",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "main": "libs/shared/react/src/index.ts",
+        "project": "libs/shared/react/package.json",
+        "tsConfig": "libs/shared/react/tsconfig.lib.json",
+        "outputPath": "dist/libs/shared/react",
+        "rollupConfig": "@nx/react/plugins/bundle-rollup",
+        "compiler": "babel",
+        "format": ["cjs", "esm"],
+        "external": ["react", "react-dom", "react/jsx-runtime"],
+        "generateExportsField": true,
+        "assets": [
+          {
+            "glob": "*.md",
+            "input": ".",
+            "output": "."
+          },
+          {
+            "glob": "LICENSE",
+            "input": "{workspaceRoot}",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}
