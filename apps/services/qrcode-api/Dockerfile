@@ -4,7 +4,7 @@
 # Tip: Modify "docker-build" options in project.json to change docker build args.
 #
 # Run the container with `docker run -p 3000:3000 -t api-qrcode`.
-FROM docker.io/node:lts-alpine
+FROM docker.io/node:22-alpine3.19
 
 ENV HOST=0.0.0.0
 ENV PORT=3000
@@ -12,7 +12,7 @@ ENV PORT=3000
 WORKDIR /app
 
 RUN addgroup --system api-qrcode && \
-          adduser --system -G api-qrcode api-qrcode
+  adduser --system -G api-qrcode api-qrcode
 
 COPY dist/apps/api-qrcode api-qrcode
 RUN chown -R api-qrcode:api-qrcode .

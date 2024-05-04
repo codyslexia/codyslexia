@@ -2,8 +2,6 @@ import { gql } from 'graphql-tag'
 import { readFileSync } from 'fs'
 import { resolve } from 'path'
 
-import { system } from '@shared/core'
-
 import * as D from '@apollo/server/plugin/disabled'
 import { ApolloServer } from '@apollo/server'
 import { buildSubgraphSchema } from '@apollo/subgraph'
@@ -36,12 +34,11 @@ async function main() {
 
   console.log(
     JSON.stringify({
-      runner: 'backend-projects-graphql',
+      runner: 'graphql-projects',
       message: `Server ready at ${url}.`,
       timestamp: new Date().toISOString(),
     })
   )
-  console.log(system.blue('hey'))
 }
 
 main()

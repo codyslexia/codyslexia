@@ -1,7 +1,7 @@
 {
-  "name": "user-subgraph",
+  "name": "graphql-users",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/services/user-subgraph/src",
+  "sourceRoot": "apps/graphql/users/src",
   "projectType": "application",
   "tags": ["language:typescript", "layer:backend", "scope:users"],
   "targets": {
@@ -11,11 +11,11 @@
       "defaultConfiguration": "production",
       "options": {
         "platform": "node",
-        "outputPath": "dist/apps/services/user-subgraph",
+        "outputPath": "dist/apps/graphql/users",
         "format": ["cjs"],
         "bundle": true,
-        "main": "apps/services/user-subgraph/src/main.ts",
-        "tsConfig": "apps/services/user-subgraph/tsconfig.app.json",
+        "main": "apps/graphql/users/src/main.ts",
+        "tsConfig": "apps/graphql/users/tsconfig.app.json",
         "assets": [
           {
             "glob": "**/*.graphql",
@@ -98,14 +98,14 @@
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "user-subgraph:build"
+        "buildTarget": "graphql-users:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "user-subgraph:build:development"
+          "buildTarget": "graphql-users:build:development"
         },
         "production": {
-          "buildTarget": "user-subgraph:build:production"
+          "buildTarget": "graphql-users:build:production"
         }
       }
     },

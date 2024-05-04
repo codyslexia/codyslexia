@@ -1,5 +1,5 @@
 # use alpine linux as our 'base' image
-FROM docker.io/node:lts-alpine as base
+FROM docker.io/node:22-alpine3.19 AS base
 
 # set environment variables
 ENV HOST=0.0.0.0
@@ -26,21 +26,21 @@ ENTRYPOINT [ "/sbin/tini", "--" ]
 FROM base AS runner
 
 # create a system group and user for the service
-RUN addgroup --system backend-users-graphql && \
-  adduser --system -G backend-users-graphql nonroot 
+RUN addgroup --system graphql-projects && \
+  adduser --system -G graphql-projects nonroot
 
 # copy the compiled app to the 'runner' image
-COPY dist/apps/backend/projects/graphql backend-users-graphql
+COPY dist/apps/graphql/projects graphql-projects
 
 # recursively change ownership of the app to the non-root user
-RUN chown -R nonroot:backend-users-graphql . && \
-# set read and execute permissions for directories
+RUN chown -R nonroot:graphql-projects . && \
+  # set read and execute permissions for directories
   find . -type d -exec chmod 500 {} \; && \
-# set read permissions for files
+  # set read permissions for files
   find . -type f -exec chmod 400 {} \;
 
 # install app dependencies
-RUN pnpm --prefix backend-users-graphql install --prod --silent
+RUN pnpm --prefix graphql-projects install --prod --silent
 
 # install process manager
 RUN pnpm install -g pm2 --silent
@@ -51,5 +51,5 @@ USER nonroot
 # ephemeral port
 EXPOSE $PORT
 
-# run process 'backend-users-graphql' in watch mode
-CMD [ "pm2-runtime", "backend-users-graphql", "--watch" ]
+# run process 'graphql-projects' in watch mode
+CMD [ "pm2-runtime", "graphql-projects", "--watch" ]

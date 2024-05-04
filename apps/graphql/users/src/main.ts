@@ -41,7 +41,7 @@ async function main() {
 
   console.log(
     JSON.stringify({
-      runner: 'backend-users-graphql',
+      runner: 'graphql-users',
       message: `Server ready at ${url}.`,
       timestamp: new Date().toISOString(),
     })

@@ -41,22 +41,15 @@
     "serve": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "development",
-      "dependsOn": ["prepare", "compose"],
+      "dependsOn": ["compose"],
       "options": {
-        "parallel": true,
-        "buildTarget": "graphql-gateway:build"
+        "parallel": true
       },
       "configurations": {
         "subgraphs": {
           "commands": [
-            {
-              "command": "nx serve user-subgraph",
-              "color": "blue"
-            },
-            {
-              "command": "nx serve project-subgraph",
-              "color": "green"
-            }
+            { "command": "nx serve graphql-users", "color": "blue" },
+            { "command": "nx serve graphql-projects", "color": "green" }
           ]
         },
         "development": {
@@ -98,6 +91,7 @@
     "local": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
+      "dependsOn": ["compose"],
       "options": {
         "buildTarget": "graphql-gateway:build"
       },
@@ -112,11 +106,13 @@
     },
     "serve-local": {
       "executor": "nx:run-commands",
-      "dependsOn": ["prepare", "compose"],
+      "dependsOn": ["compose"],
       "options": {
         "parallel": true,
-        "buildTarget": "graphql-gateway:build",
-        "commands": ["nx run graphql-gateway:subgraphs", "nx run graphql-gateway:local"]
+        "commands": [
+          { "command": "nx run graphql-gateway:subgraphs" },
+          { "command": "nx run graphql-gateway:local" }
+        ]
       }
     },
     "subgraphs": {
@@ -124,19 +120,15 @@
       "options": {
         "parallel": true,
         "commands": [
-          {
-            "command": "nx serve graphql-users",
-            "color": "blue"
-          },
-          {
-            "command": "nx serve graphql-projects",
-            "color": "green"
-          }
+          { "command": "nx serve graphql-users", "color": "blue" },
+          { "command": "nx serve graphql-projects", "color": "green" }
         ]
       }
     },
     "prepare": {
       "executor": "nx:run-commands",
+      "cache": true,
+      "outputs": ["{workspaceRoot}/tmp/router"],
       "options": {
         "commands": [
           "node scripts/install-apollo-router.js",
@@ -148,6 +140,12 @@
     "compose": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "development",
+      "cache": true,
+      "inputs": [
+        "{workspaceRoot}/apps/graphql/**/*.graphql",
+        "!{workspaceRoot}/apps/graphql/gateway/**/*.graphql"
+      ],
+      "outputs": ["{projectRoot}/**/*.graphql"],
       "configurations": {
         "development": {
           "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.dev.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"

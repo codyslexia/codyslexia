@@ -233,7 +233,8 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
             specifier = await resolveSemverSpecifierFromConventionalCommits(
               previousVersionRef,
               options.projectGraph,
-              affectedProjects
+              affectedProjects,
+              options.conventionalCommitsConfig
             )
 
             if (!specifier) {

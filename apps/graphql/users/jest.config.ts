@@ -9,14 +9,14 @@ import type { Config } from 'jest'
 
 /* eslint-disable */
 export const config: Config = {
-  displayName: 'project-subgraph',
+  displayName: 'graphql-users',
   preset: '../../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../coverage/apps/services/project-subgraph',
+  coverageDirectory: '../../../coverage/apps/graphql/users',
 }
 
 export default config

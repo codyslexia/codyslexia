@@ -5,27 +5,27 @@ subgraphs:
     routing_url: http://localhost:4001/
     schema:
       base: .
-      file: '../../../../services/user-subgraph/src/schema.graphql'
+      file: '../../../../graphql/users/src/schema.graphql'
       graphref: nexa@dev
       subgraph: users
       subgraph_url: http://localhost:4001/
     request:
       - insert:
           name: 'Router-Authorization'
-          value: '${env.USERS_SUBGRAPH_SECRET}'
+          value: env.USERS_SUBGRAPH_SECRET
 
   projects:
     routing_url: http://localhost:4002/
     schema:
       base: .
-      file: '../../../../services/project-subgraph/src/schema.graphql'
+      file: '../../../../graphql/projects/src/schema.graphql'
       graphref: nexa@dev
       subgraph: projects
       subgraph_url: http://localhost:4002/
     request:
       - insert:
           name: 'Router-Authorization'
-          value: '${env.PROJECTS_SUBGRAPH_SECRET}'
+          value: env.PROJECTS_SUBGRAPH_SECRET
 
 headers:
   all:
@@ -37,12 +37,12 @@ headers:
       request:
         - insert:
             name: 'Router-Authorization'
-            value: '${env.USERS_SUBGRAPH_SECRET}'
+            value: env.USERS_SUBGRAPH_SECRET
     projects:
       request:
         - insert:
             name: 'Router-Authorization'
-            value: '${env.PROJECTS_SUBGRAPH_SECRET}'
+            value: env.PROJECTS_SUBGRAPH_SECRET
 
 cors:
   allow_any_origin: false

@@ -13,9 +13,18 @@ type Query {
   projects: [Project]
 }
 
+enum ProjectKind {
+  "A project that is a website"
+  WEBSITE
+  "A project that is a mobile app"
+  MOBILE
+  "A project that is a desktop app"
+  DESKTOP
+}
+
 type Mutation {
   "Create a new project"
-  createProject(email: String): Project
+  createProject(kind: ProjectKind): Project
 }
 
 type Project @key(fields: "id") {

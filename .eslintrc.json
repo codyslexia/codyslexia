@@ -11,7 +11,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nx/workspace-copyright": "warn",
+        // "@nx/workspace-copyright": "warn",
         "@nx/enforce-module-boundaries": [
           "error",
           {

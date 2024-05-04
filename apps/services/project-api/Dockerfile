@@ -1,5 +1,5 @@
 # use alpine linux as our 'base' image
-FROM docker.io/node:lts-alpine as base
+FROM docker.io/node:22-alpine3.19 as base
 
 # set environment variables
 ENV HOST=0.0.0.0
@@ -34,9 +34,9 @@ COPY dist/apps/backend/projects/manager project-api
 
 # recursively change ownership of the app to the non-root user
 RUN chown -R nonroot:project-api . && \
-# set read and execute permissions for directories
+  # set read and execute permissions for directories
   find . -type d -exec chmod 500 {} \; && \
-# set read permissions for files
+  # set read permissions for files
   find . -type f -exec chmod 400 {} \;
 
 # install app dependencies

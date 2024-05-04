@@ -18,7 +18,13 @@ export const Query = {
 }
 
 export const Mutation = {
-  createProject(_, { userId, kind = 'cloud', environment = 'development' }) {
+  createProject(
+    parent,
+    { userId = identifier('usr'), kind = 'cloud', environment = 'development' },
+    context,
+    info
+  ) {
+    console.log('context', context)
     return { id: identifier('prj'), userId, environment, kind }
   },
 }

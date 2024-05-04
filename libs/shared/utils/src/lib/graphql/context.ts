@@ -33,7 +33,7 @@ export function validateRequest(request: GraphQLRequest) {
   if (!request.http?.headers.get('authorization')) {
     throw new GraphQLError('Missing authentication', {
       extensions: {
-        code: 'UNAUTHENTICATED',
+        code: 'UNAUTHORIZED',
         http: { status: 401 },
       },
     })
@@ -54,7 +54,7 @@ export function isRouterAuthorized(request: IncomingMessage) {
   if (!hasValidSecret(request)) {
     throw new GraphQLError('Invalid Router Authentication', {
       extensions: {
-        code: 'UNAUTHENTICATED',
+        code: 'UNAUTHORIZED',
         http: { status: 401 },
       },
     })
