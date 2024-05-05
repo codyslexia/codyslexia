@@ -4,15 +4,10 @@ import { Code, Text } from '@radix-ui/themes'
 import Image from 'next/image'
 import React from 'react'
 
-// simple api client to fetch the totp data
-
-async function fetcher(url: string, port?: number) {
-  const res = await fetch(`http://localhost:${port ?? 3000}${url}`)
-  return res.json()
-}
+import { getTotp } from './get-totp'
 
 export default async function TOTPPage() {
-  const [{ id, secret, backup, image }] = await fetcher('/generate', 3003)
+  const [{ id, secret, backup, image }] = await getTotp()
 
   return (
     <>

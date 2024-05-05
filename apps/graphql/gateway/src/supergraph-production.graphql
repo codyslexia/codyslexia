@@ -20,6 +20,25 @@ directive @join__unionMember(graph: join__Graph!, member: String!) repeatable on
 
 directive @link(url: String, as: String, for: link__Purpose, import: [link__Import]) repeatable on SCHEMA
 
+input CreateProjectInput
+  @join__type(graph: PROJECTS)
+{
+  """The id of the user who owns this project"""
+  userId: String!
+
+  """The name of the project"""
+  name: String
+
+  """The description of the project"""
+  description: String
+
+  """The kind of project this is"""
+  kind: ProjectKind!
+
+  """The environment this project is running in"""
+  environment: ProjectEnvironment
+}
+
 scalar join__FieldSet
 
 enum join__Graph {
@@ -46,7 +65,7 @@ type Mutation
   @join__type(graph: USERS)
 {
   """Create a new project"""
-  createProject(userId: ID, kind: ProjectKind, environment: ProjectEnvironment): Project @join__field(graph: PROJECTS)
+  createProject(input: CreateProjectInput): Project @join__field(graph: PROJECTS)
 
   """Login as a user"""
   login(email: String, password: String): User @join__field(graph: USERS)
@@ -63,43 +82,61 @@ type Project
   """The id of the user who owns this project"""
   userId: ID!
 
+  """The name of the project"""
+  name: String
+
+  """The description of the project"""
+  description: String
+
   """The kind of project this is"""
   kind: ProjectKind
 
   """The environment this project is running in"""
   environment: ProjectEnvironment
+
+  """The user who owns this project"""
+  user: User
+
+  """The date this project was created"""
+  createdAt: String
+
+  """The date this project was last updated"""
+  updatedAt: String
 }
 
 enum ProjectEnvironment
   @join__type(graph: PROJECTS)
 {
   """A project that is in development"""
-  development @join__enumValue(graph: PROJECTS)
+  DEVELOPMENT @join__enumValue(graph: PROJECTS)
 
   """A project that is in staging"""
-  staging @join__enumValue(graph: PROJECTS)
+  STAGING @join__enumValue(graph: PROJECTS)
 
   """A project that is in production"""
-  production @join__enumValue(graph: PROJECTS)
+  PRODUCTION @join__enumValue(graph: PROJECTS)
 }
 
 enum ProjectKind
   @join__type(graph: PROJECTS)
 {
   """A project that is a website"""
-  web @join__enumValue(graph: PROJECTS)
+  WEB @join__enumValue(graph: PROJECTS)
 
   """A project that is a mobile app"""
-  mobile @join__enumValue(graph: PROJECTS)
+  MOBILE @join__enumValue(graph: PROJECTS)
 
   """A project that is a desktop app"""
-  api @join__enumValue(graph: PROJECTS)
+  API @join__enumValue(graph: PROJECTS)
 }
 
 type Query
   @join__type(graph: PROJECTS)
   @join__type(graph: USERS)
 {
+  """Get a project by its id"""
+  project(id: ID!): Project @join__field(graph: PROJECTS)
+
   """The full list of projects available to the current user"""
   projects: [Project] @join__field(graph: PROJECTS)
 
@@ -108,13 +145,20 @@ type Query
 
   """Get all users (admin only)"""
   users: [User] @join__field(graph: USERS)
+
+  """Get a user by ID"""
+  user(id: ID!): User @join__field(graph: USERS)
 }
 
 type User
+  @join__type(graph: PROJECTS, key: "id", extension: true)
   @join__type(graph: USERS, key: "id")
 {
   id: ID!
 
+  """The projects this user owns"""
+  projects: [Project!]! @join__field(graph: PROJECTS)
+
   """The user's email address"""
-  email: String
+  email: String @join__field(graph: USERS)
 }

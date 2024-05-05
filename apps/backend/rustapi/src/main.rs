@@ -1,3 +1,4 @@
+use actix_cors::Cors;
 use actix_web::{get, web, App, HttpResponse, HttpServer, Responder, Result};
 use chrono::{DateTime, Utc};
 use serde::Serialize;
@@ -35,12 +36,21 @@ async fn not_found() -> Result<HttpResponse> {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
+    let _ = HttpServer::new(|| {
+        let cors = Cors::default()
+            .allow_any_origin()
+            .allow_any_method()
+            .allow_any_header()
+            .max_age(3600);
+
         App::new()
+            .wrap(cors)
             .service(status)
             .default_service(web::route().to(not_found))
     })
     .bind(("127.0.0.1", 8003))?
     .run()
-    .await
+    .await;
+
+    Ok(())
 }

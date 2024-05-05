@@ -7,16 +7,25 @@
 
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
+import { GraphQLError } from 'graphql'
 import gql from 'graphql-tag'
 
 import * as D from '@apollo/server/plugin/disabled'
 import { ApolloServer } from '@apollo/server'
 import { buildSubgraphSchema } from '@apollo/subgraph'
+import { ApolloServerErrorCode } from '@apollo/server/errors'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { federatedContext } from '@shared/utils'
+
 import * as resolvers from './resolvers'
 import { connect, disconnect, log } from './shared/infra/database/mongoose/config'
+
+export interface FormattedError extends GraphQLError {
+  extensions: {
+    code: ApolloServerErrorCode
+  }
+}
 
 process.on('uncaughtException', (erro: Error) => {
   log(`Erro Nodejs: Uncaught Exception`)
@@ -39,6 +48,16 @@ async function main() {
     plugins,
     status400ForVariableCoercionErrors: true,
     schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    formatError: (formattedError: FormattedError, error: GraphQLError) => {
+      if (formattedError.extensions.code === ApolloServerErrorCode.GRAPHQL_VALIDATION_FAILED) {
+        return {
+          ...formattedError,
+          message: "Your query doesn't match the schema. Try double-checking it!",
+        }
+      }
+      return formattedError
+    },
   })
 
   await connect()

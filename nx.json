@@ -50,14 +50,6 @@
       "options": {}
     },
     {
-      "plugin": "@plugins/python",
-      "options": {}
-    },
-    {
-      "plugin": "@plugins/rust",
-      "options": {}
-    },
-    {
       "plugin": "@plugins/workspace",
       "options": {}
     },

@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { UserModel } from '../shared/infra/database/mongoose/models/User'
+import { UserDoc, UserModel } from '../shared/infra/database/mongoose/models/User'
 
 export * as Query from './user-queries'
 export * as Mutation from './user-mutations'
 
 export const User = {
-  __resolveReference: async function (user, { fetchUserById }) {
-    // return fetchUserById(user.id)
+  // TODO: @moatorres - Implement fetchUserById
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  __resolveReference: async function (user: UserDoc, { fetchUserById }) {
     return await UserModel.findById(user.id)
   },
 }
