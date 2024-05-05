@@ -40,24 +40,15 @@
       }
     },
     "compose": {
-      "cache": true,
       "executor": "nx:run-commands",
-      "inputs": ["{workspaceRoot}/apps/graphql/**/schema.graphql"],
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "development",
-      "configurations": {
-        "development": {
-          "options": {
-            "outputPath": "{projectRoot}/src/supergraph.graphql"
-          },
-          "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.dev.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"
-        },
-        "production": {
-          "options": {
-            "outputPath": "{projectRoot}/src/supergraph-production.graphql"
-          },
-          "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.prod.yaml --output {projectRoot}/src/supergraph-production.graphql --elv2-license=accept"
-        }
+      "cache": true,
+      "inputs": [
+        "!{workspaceRoot}/apps/graphql/gateway/**/*",
+        "{workspaceRoot}/apps/graphql/**/schema.graphql"
+      ],
+      "outputs": ["{projectRoot}/src/supergraph.graphql"],
+      "options": {
+        "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.dev.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"
       }
     },
     "docker": {
@@ -123,14 +114,11 @@
     },
     "apollo-install": {
       "executor": "nx:run-commands",
-      "cache": true,
-      "outputs": ["{workspaceRoot}/tmp/router"],
       "options": {
         "commands": [
           "node scripts/install-apollo-router.js",
           "node scripts/install-apollo-rover.js"
-        ],
-        "parallel": true
+        ]
       }
     },
     "apollo-router": {
