@@ -21,7 +21,6 @@
       "@codyslexia/statejs": ["libs/packages/statejs/src/index.ts"],
       "@plugins/golang": ["libs/plugins/golang/src/index.ts"],
       "@plugins/graphql": ["libs/plugins/graphql/src/index.ts"],
-      "@plugins/python": ["libs/plugins/python/src/index.ts"],
       "@plugins/rust": ["libs/plugins/rust/src/index.ts"],
       "@plugins/workspace": ["libs/plugins/workspace/src/index.ts"],
       "@plugins/zig": ["libs/plugins/zig/src/index.ts"],
