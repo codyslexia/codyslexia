@@ -92,9 +92,18 @@
       "options": {
         "parallel": true,
         "commands": [
-          { "command": "nx run graphql-gateway:run", "color": "magenta" },
-          { "command": "nx run graphql-users:serve", "color": "blue" },
-          { "command": "nx run graphql-projects:serve", "color": "green" }
+          {
+            "command": "nx run graphql-gateway:run",
+            "color": "magenta"
+          },
+          {
+            "command": "nx run graphql-users:serve",
+            "color": "blue"
+          },
+          {
+            "command": "nx run graphql-projects:serve",
+            "color": "green"
+          }
         ]
       }
     },
@@ -133,8 +142,14 @@
       "configurations": {
         "subgraphs": {
           "commands": [
-            { "command": "nx serve graphql-users", "color": "blue" },
-            { "command": "nx serve graphql-projects", "color": "green" }
+            {
+              "command": "nx serve graphql-users",
+              "color": "blue"
+            },
+            {
+              "command": "nx serve graphql-projects",
+              "color": "green"
+            }
           ]
         },
         "development": {
