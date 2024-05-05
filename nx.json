@@ -77,16 +77,6 @@
         "devTargetName": "dev",
         "startTargetName": "start"
       }
-    },
-    {
-      "plugin": "@nx/vite/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "previewTargetName": "preview",
-        "testTargetName": "test",
-        "serveTargetName": "serve",
-        "serveStaticTargetName": "serve-static"
-      }
     }
   ],
   "targetDefaults": {
@@ -110,11 +100,6 @@
         "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/tools/eslint-rules/**/*"
       ]
-    },
-    "@nx/expo:build": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
     },
     "@nx/jest:jest": {
       "cache": true,

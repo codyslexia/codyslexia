@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "tslib": "^2.3.0",
-    "util": "0.12.5",
     "bcrypt": "^5.1.1",
     "@apollo/server": "^4.10.0",
     "graphql": "^16.8.1",

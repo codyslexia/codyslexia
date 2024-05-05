@@ -1042,7 +1042,7 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
         specifier: 'major',
         currentVersionResolver: 'disk',
         releaseGroup: createReleaseGroup('fixed'),
-        versionPrefix: '$',
+        versionPrefix: '',
       })
 
       expect(outputSpy).toHaveBeenCalledWith({

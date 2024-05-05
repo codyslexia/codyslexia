@@ -50,7 +50,7 @@ describe('libs/common/encrypter', () => {
 
   it('createKeyPair', async () => {
     const { privateKey, publicKey } = await encrypter.createKeyPair()
-    expect(privateKey.length).toEqual(1624 || 1628)
+    expect(privateKey.length).toEqual(1624 ?? 1628)
     expect(typeof privateKey).toEqual('string')
     expect(publicKey.length).toEqual(392)
     expect(typeof publicKey).toEqual('string')
