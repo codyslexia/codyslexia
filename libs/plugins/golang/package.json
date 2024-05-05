@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "tslib": "^2.3.0",
-    "@nx/devkit": "18.2.1"
+    "@nx/devkit": "18.3.4"
   },
   "type": "commonjs",
   "main": "./src/index.js",

@@ -26,6 +26,7 @@
     "check-lock-files": "node ./scripts/check-lock-files.js",
     "clean": "rm -rf dist",
     "commit": "czg",
+    "format": "nx format --all",
     "lint": "nx run-many -t lint",
     "test": "nx run-many -t test",
     "preinstall": "node ./scripts/preinstall.js",

@@ -9,7 +9,7 @@
     "directory": "libs/plugins/workspace"
   },
   "dependencies": {
-    "@nx/devkit": "18.2.1",
+    "@nx/devkit": "18.3.4",
     "tslib": "^2.3.0"
   },
   "type": "commonjs",
