@@ -1,33 +1,5 @@
-import { identifier } from '@shared/utils'
-
-export const Query = {
-  projects() {
-    const projects = []
-
-    for (let i = 0; i < 3; i++) {
-      projects.push({
-        id: identifier('prj'),
-        userId: identifier('usr'),
-        kind: i % 2 !== 0 ? 'cloud' : 'web',
-        environment: i % 2 === 0 ? 'development' : 'staging',
-      })
-    }
-
-    return projects
-  },
-}
-
-export const Mutation = {
-  createProject(
-    parent,
-    { userId = identifier('usr'), kind = 'cloud', environment = 'development' },
-    context,
-    info
-  ) {
-    console.log('context', context)
-    return { id: identifier('prj'), userId, environment, kind }
-  },
-}
+export * as Query from './project-queries'
+export * as Mutation from './project-mutations'
 
 export const Project = {
   __resolveReference(project, { fetchProjectById }) {

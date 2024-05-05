@@ -16,13 +16,20 @@ import { startStandaloneServer } from '@apollo/server/standalone'
 
 import { federatedContext } from '@shared/utils'
 import * as resolvers from './resolvers'
+import { connect, disconnect, log } from './shared/infra/database/mongoose/config'
+
+process.on('uncaughtException', (erro: Error) => {
+  log(`Erro Nodejs: Uncaught Exception`)
+  console.error(erro.name, erro.message, erro.stack)
+  process.exit(1)
+})
 
 const plugins = [
   D.ApolloServerPluginInlineTraceDisabled(),
   D.ApolloServerPluginUsageReportingDisabled(),
 ]
 
-const APOLLO_PORT = Number(process.env.PORT || 4001)
+const APOLLO_PORT = Number(process.env.PORT ?? 4001)
 const GRAPHQL_SCHEMA_PATH = resolve(__dirname, 'schema.graphql')
 
 async function main() {
@@ -34,18 +41,22 @@ async function main() {
     schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
   })
 
+  await connect()
+
   const { url } = await startStandaloneServer(server, {
     context: federatedContext,
     listen: { port: APOLLO_PORT },
   })
 
-  console.log(
-    JSON.stringify({
-      runner: 'graphql-users',
-      message: `Server ready at ${url}.`,
-      timestamp: new Date().toISOString(),
-    })
-  )
+  process.on('unhandledRejection', (erro: Error) => {
+    log(`Erro Nodejs: Unhandled Rejection`)
+    console.error(erro.name, erro.message, erro.stack)
+    server.stop()
+    disconnect()
+    process.exit(1)
+  })
+
+  log(`Server ready at ${url}`)
 }
 
 main()

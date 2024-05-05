@@ -17,9 +17,9 @@ type Query {
 
 type Mutation {
   "Login as a user"
-  login(email: String): User
+  login(email: String, password: String): User
   "Create a new user"
-  createUser(email: String): User
+  createUser(email: String, password: String): User
 }
 
 type User @key(fields: "id") {

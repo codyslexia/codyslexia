@@ -1,5 +1,5 @@
 [tool.nx]
-autoActivate = true
+autoActivate = false
 
 [tool.poetry]
 name = "@codyslexia/source"

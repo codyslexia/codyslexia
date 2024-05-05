@@ -15,24 +15,49 @@ type Query {
 
 enum ProjectKind {
   "A project that is a website"
-  WEBSITE
+  web
   "A project that is a mobile app"
-  MOBILE
+  mobile
   "A project that is a desktop app"
-  DESKTOP
+  api
+}
+
+enum ProjectEnvironment {
+  "A project that is in development"
+  development
+  "A project that is in staging"
+  staging
+  "A project that is in production"
+  production
 }
 
 type Mutation {
   "Create a new project"
-  createProject(kind: ProjectKind): Project
+  createProject(userId: String, kind: ProjectKind, environment: ProjectEnvironment): Project
 }
 
 type Project @key(fields: "id") {
   id: ID!
   "The id of the user who owns this project"
   userId: ID!
+  "The name of the project"
+  name: String
+  "The description of the project"
+  description: String
   "The kind of project this is"
-  kind: String
+  kind: ProjectKind
   "The environment this project is running in"
-  environment: String
+  environment: ProjectEnvironment
+  "The user who owns this project"
+  user: User
+  "The date this project was created"
+  createdAt: String
+  "The date this project was last updated"
+  updatedAt: String
+}
+
+extend type User @key(fields: "id") {
+  id: ID! @external
+  # "The user's email address"
+  email: String @external
 }

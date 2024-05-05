@@ -46,13 +46,13 @@ type Mutation
   @join__type(graph: USERS)
 {
   """Create a new project"""
-  createProject(kind: ProjectKind): Project @join__field(graph: PROJECTS)
+  createProject(userId: String, kind: ProjectKind, environment: ProjectEnvironment): Project @join__field(graph: PROJECTS)
 
   """Login as a user"""
-  login(email: String): User @join__field(graph: USERS)
+  login(email: String, password: String): User @join__field(graph: USERS)
 
   """Create a new user"""
-  createUser(email: String): User @join__field(graph: USERS)
+  createUser(email: String, password: String): User @join__field(graph: USERS)
 }
 
 type Project
@@ -63,24 +63,46 @@ type Project
   """The id of the user who owns this project"""
   userId: ID!
 
+  """The name of the project"""
+  name: String
+
   """The kind of project this is"""
-  kind: String
+  kind: ProjectKind
 
   """The environment this project is running in"""
-  environment: String
+  environment: ProjectEnvironment
+
+  """The date this project was created"""
+  createdAt: String
+
+  """The date this project was last updated"""
+  updatedAt: String
+}
+
+enum ProjectEnvironment
+  @join__type(graph: PROJECTS)
+{
+  """A project that is in development"""
+  development @join__enumValue(graph: PROJECTS)
+
+  """A project that is in staging"""
+  staging @join__enumValue(graph: PROJECTS)
+
+  """A project that is in production"""
+  production @join__enumValue(graph: PROJECTS)
 }
 
 enum ProjectKind
   @join__type(graph: PROJECTS)
 {
   """A project that is a website"""
-  WEBSITE @join__enumValue(graph: PROJECTS)
+  web @join__enumValue(graph: PROJECTS)
 
   """A project that is a mobile app"""
-  MOBILE @join__enumValue(graph: PROJECTS)
+  mobile @join__enumValue(graph: PROJECTS)
 
   """A project that is a desktop app"""
-  DESKTOP @join__enumValue(graph: PROJECTS)
+  api @join__enumValue(graph: PROJECTS)
 }
 
 type Query
