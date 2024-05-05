@@ -1,4 +1,4 @@
-import { InternalServerError } from '@shared/core'
+import { InternalServerError, NotFound } from '@shared/core'
 
 import { log } from '../shared/infra/database/mongoose/config'
 import { ProjectModel } from '../shared/infra/database/mongoose/models/Project'
@@ -32,10 +32,18 @@ export async function projects() {
  */
 export async function project(parent, { id }) {
   try {
+    const existingProject = await ProjectModel.exists({ _id: id })
+
+    if (!existingProject) {
+      throw new NotFound('Project not found')
+    }
+
     const project = (await ProjectModel.findById(id)).toObject()
+
     const user = await mongoose.connection.db
       .collection('users')
       .findOne({ _id: new mongoose.Types.ObjectId(project.userId) })
+
     return { ...project, id: project._id, user: { id: user._id, email: user.email } }
   } catch (error) {
     log(error.message, 'error')
