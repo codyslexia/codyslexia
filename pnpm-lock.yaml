@@ -7,6 +7,11 @@ settings:
 overrides:
   axios@>=0.8.1 <1.6.0: '>=1.6.0'
   semver@>=7.0.0 <7.5.2: '>=7.5.2'
+  yargs-parser@<=5.0.0: '>=5.0.1'
+  node-fetch@<2.6.1: '>=2.6.1'
+  node-fetch@<2.6.7: '>=2.6.7'
+  express@<4.19.2: '>=4.19.2'
+  tar@<6.2.1: '>=6.2.1'
 
 dependencies:
   '@actions/exec':
@@ -10650,7 +10655,7 @@ packages:
       '@verdaccio/url': 12.0.0-next-7.13
       '@verdaccio/utils': 7.0.0-next-7.13
       debug: 4.3.4
-      express: 4.18.3
+      express: 4.19.2
       express-rate-limit: 5.5.1
       lodash: 4.17.21
       lru-cache: 7.18.3
@@ -12168,11 +12173,6 @@ packages:
       tslib: 2.6.2
     dev: true
 
-  /camelcase@3.0.0:
-    resolution: {integrity: sha512-4nhGqUkc4BqbBBB4Q6zLuD7lzzrHYrjKGeYaEji/3tFR5VdJu9v+LilhGIVe8wxEJPPOeWo7eg8dwY13TZ1BNg==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /camelcase@5.3.1:
     resolution: {integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==}
     engines: {node: '>=6'}
@@ -12764,11 +12764,6 @@ packages:
 
   /cookie@0.4.2:
     resolution: {integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==}
-    engines: {node: '>= 0.6'}
-    dev: true
-
-  /cookie@0.5.0:
-    resolution: {integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==}
     engines: {node: '>= 0.6'}
     dev: true
 
@@ -13894,8 +13889,11 @@ packages:
 
   /encoding@0.1.13:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
+    requiresBuild: true
     dependencies:
       iconv-lite: 0.6.3
+    dev: false
+    optional: true
 
   /end-of-stream@1.4.4:
     resolution: {integrity: sha512-+uw1inIHVPQoaVuHzRyXd21icM+cnt4CzD5rW+NC1wjOUSTOs+Te7FOv7AhN7vS9x/oIyhLP5PR1H+phQAHu5Q==}
@@ -14855,45 +14853,6 @@ packages:
       validator: 13.11.0
     dev: false
 
-  /express@4.18.3:
-    resolution: {integrity: sha512-6VyCijWQ+9O7WuVMTRBTl+cjNNIzD5cY5mQ1WM8r/LEkI2u8EYpOotESNwzNlyCn3g+dmjKYI6BmNneSr/FSRw==}
-    engines: {node: '>= 0.10.0'}
-    dependencies:
-      accepts: 1.3.8
-      array-flatten: 1.1.1
-      body-parser: 1.20.2
-      content-disposition: 0.5.4
-      content-type: 1.0.5
-      cookie: 0.5.0
-      cookie-signature: 1.0.6
-      debug: 2.6.9
-      depd: 2.0.0
-      encodeurl: 1.0.2
-      escape-html: 1.0.3
-      etag: 1.8.1
-      finalhandler: 1.2.0
-      fresh: 0.5.2
-      http-errors: 2.0.0
-      merge-descriptors: 1.0.1
-      methods: 1.1.2
-      on-finished: 2.4.1
-      parseurl: 1.3.3
-      path-to-regexp: 0.1.7
-      proxy-addr: 2.0.7
-      qs: 6.11.0
-      range-parser: 1.2.1
-      safe-buffer: 5.2.1
-      send: 0.18.0
-      serve-static: 1.15.0
-      setprototypeof: 1.2.0
-      statuses: 2.0.1
-      type-is: 1.6.18
-      utils-merge: 1.0.1
-      vary: 1.1.2
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /express@4.19.2:
     resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
     engines: {node: '>= 0.10.0'}
@@ -15835,8 +15794,10 @@ packages:
       graphql: 0.7.2
       inflected: 1.1.7
       mkdirp: 0.5.6
-      node-fetch: 1.7.3
+      node-fetch: 2.7.0
       yargs: 5.0.0
+    transitivePeerDependencies:
+      - encoding
     dev: true
 
   /graphql-config@5.0.3(@types/node@18.19.15)(graphql@16.8.1)(typescript@5.3.3):
@@ -19623,13 +19584,6 @@ packages:
       web-streams-polyfill: 3.3.3
     dev: false
 
-  /node-fetch@1.7.3:
-    resolution: {integrity: sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==}
-    dependencies:
-      encoding: 0.1.13
-      is-stream: 1.1.0
-    dev: true
-
   /node-fetch@2.6.7:
     resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
@@ -19801,7 +19755,7 @@ packages:
       node-machine-id: 1.1.12
       open: 8.4.2
       strip-json-comments: 3.1.1
-      tar: 6.1.11
+      tar: 6.2.1
       yargs-parser: 21.1.1
     transitivePeerDependencies:
       - debug
@@ -23977,18 +23931,6 @@ packages:
       inherits: 2.0.4
       readable-stream: 3.6.2
 
-  /tar@6.1.11:
-    resolution: {integrity: sha512-an/KZQzQUkZCkuoAA64hM92X0Urb6VpRhAFllDzz44U2mcD5scmT3zBc4VgVpkugF580+DQn8eAFSyoQt0tznA==}
-    engines: {node: '>= 10'}
-    dependencies:
-      chownr: 2.0.0
-      fs-minipass: 2.1.0
-      minipass: 3.3.6
-      minizlib: 2.1.2
-      mkdirp: 1.0.4
-      yallist: 4.0.0
-    dev: true
-
   /tar@6.2.1:
     resolution: {integrity: sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==}
     engines: {node: '>=10'}
@@ -24954,7 +24896,7 @@ packages:
     dependencies:
       '@verdaccio/config': 7.0.0-next-7.13
       '@verdaccio/core': 7.0.0-next-7.13
-      express: 4.18.3
+      express: 4.19.2
       https-proxy-agent: 5.0.1
       node-fetch: 2.6.7
     transitivePeerDependencies:
@@ -25004,7 +24946,7 @@ packages:
       cors: 2.8.5
       debug: 4.3.4
       envinfo: 7.11.1
-      express: 4.18.3
+      express: 4.19.2
       express-rate-limit: 5.5.1
       fast-safe-stringify: 2.1.1
       handlebars: 4.7.8
@@ -25779,13 +25721,6 @@ packages:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
 
-  /yargs-parser@3.2.0:
-    resolution: {integrity: sha512-eANlJIqYwhwS/asi4ybKxkeJYUIjNMZXL36C/KICV5jyudUZWp+/lEfBHM0PuJcQjBfs00HwqePEQjtLJd+Kyw==}
-    dependencies:
-      camelcase: 3.0.0
-      lodash.assign: 4.2.0
-    dev: true
-
   /yargs@15.4.1:
     resolution: {integrity: sha512-aePbxDmcYW++PaqBsJ+HYUFwCdv4LVvdnhBy78E57PIor8/OVvhMrADFFEDh8DHDFRv/O9i3lPhsENjO7QX0+A==}
     engines: {node: '>=8'}
@@ -25830,7 +25765,7 @@ packages:
       which-module: 1.0.0
       window-size: 0.2.0
       y18n: 3.2.2
-      yargs-parser: 3.2.0
+      yargs-parser: 21.1.1
     dev: true
 
   /yn@3.1.1:
