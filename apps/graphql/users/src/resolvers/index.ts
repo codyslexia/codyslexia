@@ -5,11 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { UserModel } from '../shared/infra/database/mongoose/models/User'
+
 export * as Query from './user-queries'
 export * as Mutation from './user-mutations'
 
 export const User = {
-  __resolveReference(user: { id: string; email?: string }, { fetchUserById }) {
-    return fetchUserById(user.id)
+  __resolveReference: async function (user, { fetchUserById }) {
+    // return fetchUserById(user.id)
+    return await UserModel.findById(user.id)
   },
 }

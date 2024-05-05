@@ -28,3 +28,15 @@ export async function users() {
     throw new InternalServerError(error.message)
   }
 }
+
+/**
+ * Returns the user by id.
+ */
+export async function user(parent, { id }) {
+  try {
+    return await UserModel.findById(id)
+  } catch (error) {
+    log(error.message, 'error')
+    throw new InternalServerError(error.message)
+  }
+}

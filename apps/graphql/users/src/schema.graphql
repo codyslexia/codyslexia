@@ -3,7 +3,8 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"]) {
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@external"]) {
   query: Query
   mutation: Mutation
 }
@@ -13,6 +14,8 @@ type Query {
   me: User
   "Get all users (admin only)"
   users: [User]
+  "Get a user by ID"
+  user(id: ID!): User
 }
 
 type Mutation {

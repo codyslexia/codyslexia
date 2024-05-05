@@ -140,12 +140,6 @@
     "compose": {
       "executor": "nx:run-commands",
       "defaultConfiguration": "development",
-      "cache": true,
-      "inputs": [
-        "{workspaceRoot}/apps/graphql/**/*.graphql",
-        "!{workspaceRoot}/apps/graphql/gateway/**/*.graphql"
-      ],
-      "outputs": ["{projectRoot}/**/*.graphql"],
       "configurations": {
         "development": {
           "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.dev.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"

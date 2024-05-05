@@ -3,37 +3,53 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
-extend schema @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key"]) {
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.0", import: ["@key", "@external"]) {
   query: Query
   mutation: Mutation
 }
 
 type Query {
+  "Get a project by its id"
+  project(id: ID!): Project
   "The full list of projects available to the current user"
   projects: [Project]
 }
 
 enum ProjectKind {
   "A project that is a website"
-  web
+  WEB
   "A project that is a mobile app"
-  mobile
+  MOBILE
   "A project that is a desktop app"
-  api
+  API
 }
 
 enum ProjectEnvironment {
   "A project that is in development"
-  development
+  DEVELOPMENT
   "A project that is in staging"
-  staging
+  STAGING
   "A project that is in production"
-  production
+  PRODUCTION
+}
+
+input CreateProjectInput {
+  "The id of the user who owns this project"
+  userId: String!
+  "The name of the project"
+  name: String
+  "The description of the project"
+  description: String
+  "The kind of project this is"
+  kind: ProjectKind!
+  "The environment this project is running in"
+  environment: ProjectEnvironment
 }
 
 type Mutation {
   "Create a new project"
-  createProject(userId: String, kind: ProjectKind, environment: ProjectEnvironment): Project
+  createProject(input: CreateProjectInput): Project
 }
 
 type Project @key(fields: "id") {
@@ -58,6 +74,6 @@ type Project @key(fields: "id") {
 
 extend type User @key(fields: "id") {
   id: ID! @external
-  # "The user's email address"
-  email: String @external
+  "The projects this user owns"
+  projects: [Project!]!
 }

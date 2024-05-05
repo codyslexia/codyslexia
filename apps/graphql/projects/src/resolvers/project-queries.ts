@@ -12,15 +12,15 @@ export async function projects() {
     const projects = await mongoose.connection.db.collection('projects').find().toArray()
 
     const populated = projects.map(async (project) => {
-      const user = await mongoose.connection.db.collection('users').findOne({ _id: project.userId })
-      return {
-        ...project,
-        id: project._id,
-        user,
-      }
+      const user = await mongoose.connection.db
+        .collection('users')
+        .findOne({ _id: project.userId })
+        .then((user) => user)
+
+      return { ...project, id: project._id, user: { id: user._id, email: user.email } }
     })
 
-    return populated
+    return Promise.all(populated)
   } catch (error) {
     log(error.message, 'error')
     throw new InternalServerError(error.message)
@@ -32,7 +32,11 @@ export async function projects() {
  */
 export async function project(parent, { id }) {
   try {
-    return await ProjectModel.findById(id)
+    const project = (await ProjectModel.findById(id)).toObject()
+    const user = await mongoose.connection.db
+      .collection('users')
+      .findOne({ _id: new mongoose.Types.ObjectId(project.userId) })
+    return { ...project, id: project._id, user: { id: user._id, email: user.email } }
   } catch (error) {
     log(error.message, 'error')
     throw new InternalServerError(error.message)
