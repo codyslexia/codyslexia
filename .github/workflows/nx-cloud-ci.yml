@@ -52,8 +52,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Start Nx Cloud CI run
-        run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
+      - run: npx nx-cloud start-ci-run  --stop-agents-after="build"
 
       - uses: nrwl/nx-set-shas@v4
       - run: npx nx-cloud record -- nx format:check
