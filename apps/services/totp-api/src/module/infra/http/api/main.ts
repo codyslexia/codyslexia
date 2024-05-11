@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2023-2024 Codyslexia
+ * @license MIT
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import {
   ConsoleLogger,
   DotenvConfigLoader,
@@ -28,7 +35,9 @@ export const server = ExpressServer.create({
   config,
   trustProxy: true,
   corsEnabled: false,
-  logger: new ConsoleLogger({ appName: config.get('APP_NAME') ?? 'totp-api' }),
+  logger: new ConsoleLogger({
+    appName: config.get('APP_NAME') ?? 'totp-api',
+  }),
   useHttps: Number(config.get('USE_HTTPS')) === 1,
 })
 

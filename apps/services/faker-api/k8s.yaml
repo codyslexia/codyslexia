@@ -31,9 +31,12 @@ spec:
             - name: PORT
               value: '3000'
           resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
             limits:
-              memory: '64M'
-              cpu: '10m'
+              memory: '1000M'
+              cpu: '1000m'
 ---
 apiVersion: v1
 kind: Service

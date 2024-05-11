@@ -6,10 +6,8 @@ metadata:
   namespace: dev
   annotations:
     cert-manager.io/cluster-issuer: cluster-issuer
-    # nginx.ingress.kubernetes.io/proxy-body-size: '2g'
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    # nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
@@ -18,16 +16,16 @@ spec:
       secretName: api-dev-tls
   rules:
     - host: local.dev
-      http: &http_rules
+      http:
         paths:
-          - path: /
+          - path: /api/faker(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: faker-api
                 port:
                   number: 80
-          - path: /totp
+          - path: /api/totp(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
