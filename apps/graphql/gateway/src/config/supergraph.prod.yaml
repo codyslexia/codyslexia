@@ -6,7 +6,7 @@ subgraphs:
     schema:
       base: .
       file: ../../../../graphql/users/src/schema.graphql
-      graphref: nexa@prod
+      graphref: codyslexia@prod
       subgraph: users
       subgraph_url: https://graphql.codyslexia.com/users
     request:
@@ -23,7 +23,7 @@ subgraphs:
     schema:
       base: .
       file: ../../../../graphql/projects/src/schema.graphql
-      graphref: nexa@prod
+      graphref: codyslexia@prod
       subgraph: projects
       subgraph_url: https://graphql.codyslexia.com/projects
     request:

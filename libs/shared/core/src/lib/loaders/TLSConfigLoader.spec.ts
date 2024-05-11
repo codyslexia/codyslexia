@@ -10,8 +10,8 @@ import { TLSConfigLoader } from './TLSConfigLoader'
 describe('TLSConfigLoader', () => {
   it('should load config from file system', () => {
     const loader = new TLSConfigLoader({
-      keyFilePath: 'apps/services/totp-api/src/config/ssl/server.key',
-      certFilePath: 'apps/services/totp-api/src/config/ssl/server.crt',
+      keyFilePath: 'tmp/.nexa/server.key',
+      certFilePath: 'tmp/.nexa/server.crt',
     })
 
     const config = loader.load()
@@ -27,8 +27,8 @@ describe('TLSConfigLoader', () => {
     process.env.TLS_CERT = 'cert'
 
     const loader = new TLSConfigLoader({
-      keyFilePath: 'apps/services/totp-api/src/config/ssl/server.key',
-      certFilePath: 'apps/services/totp-api/src/config/ssl/server.crt',
+      keyFilePath: 'tmp/.nexa/server.key',
+      certFilePath: 'tmp/.nexa/server.crt',
     })
 
     const config = loader.load()
