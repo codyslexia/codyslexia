@@ -28,4 +28,4 @@ jobs:
       # Only run this command with the `--background` flag if you have the Apollo Studio GitHub integration enabled on your repository
       - name: Run check against prod
         run: |
-          rover graph check codyslexia@prod --schema apps/graphql/gateway/src/supergraph-production.graphql --background
+          rover graph check codyslexia@prod --schema apps/graphql/gateway/src/supergraph.graphql --background
