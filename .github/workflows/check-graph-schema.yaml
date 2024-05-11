@@ -23,7 +23,7 @@ jobs:
       - name: Install Rover
         # Add Rover to the $GITHUB_PATH so it can be used in another step
         run: |
-          curl -sSL https://rover.apollo.dev/nix/v0.20.0 | sh
+          curl -sSL https://rover.apollo.dev/nix/latest | sh
           echo "$HOME/.rover/bin" >> $GITHUB_PATH
       # Only run this command with the `--background` flag if you have the Apollo Studio GitHub integration enabled on your repository
       - name: Run check against prod
