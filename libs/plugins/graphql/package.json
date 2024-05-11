@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@actions/exec": "^1.1.1",
-    "@nx/devkit": "18.3.4",
+    "@nx/devkit": "~19.0.2",
     "chalk": "4.1.2",
     "ci-info": "^4.0.0",
     "tslib": "^2.3.0"
