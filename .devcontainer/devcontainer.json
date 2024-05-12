@@ -9,7 +9,6 @@
     "ghcr.io/devcontainers/features/go:1": {},
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/rust:1": {},
-    "ghcr.io/devcontainers/features/python:1": {},
     "ghcr.io/devcontainers/features/terraform:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
@@ -42,7 +41,6 @@
 
         // syntax support
         "wholroyd.jinja",
-        "ms-python.python",
         "redhat.vscode-yaml",
         "mrmlnc.vscode-scss",
         "unifiedjs.vscode-mdx",
@@ -91,10 +89,6 @@
         },
         "[nginx]": {
           "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
-        },
-        "[python]": {
-          "editor.formatOnType": true,
-          "editor.defaultFormatter": "ms-python.autopep8"
         },
         "[rust]": {
           "editor.defaultFormatter": "rust-lang.rust-analyzer",
