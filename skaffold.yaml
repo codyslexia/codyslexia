@@ -54,6 +54,8 @@ manifests:
     - apps/backend/goapi/k8s.yaml
     - apps/backend/rustapi/k8s.yaml
     - apps/graphql/gateway/k8s.yaml
+    - apps/graphql/projects/k8s.yaml
+    - apps/graphql/users/k8s.yaml
     - apps/services/faker-api/k8s.yaml
     - apps/services/qrcode-api/k8s.yaml
     - apps/services/totp-api/k8s.yaml

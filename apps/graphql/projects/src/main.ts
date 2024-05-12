@@ -30,17 +30,17 @@ const plugins = [
 ]
 
 const APOLLO_PORT = Number(process.env.PORT ?? 4002)
-const GRAPHQL_SCHEMA_PATH = resolve(__dirname, 'schema.graphql')
+const GRAPHQL_SCHEMA_PATH = resolve(__dirname, './schema.graphql')
+
+const typeDefs = gql(readFileSync(GRAPHQL_SCHEMA_PATH, { encoding: 'utf-8' }))
+
+const server = new ApolloServer({
+  plugins,
+  status400ForVariableCoercionErrors: true,
+  schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
+})
 
 async function main() {
-  const typeDefs = gql(readFileSync(GRAPHQL_SCHEMA_PATH, { encoding: 'utf-8' }))
-
-  const server = new ApolloServer({
-    plugins,
-    status400ForVariableCoercionErrors: true,
-    schema: buildSubgraphSchema([{ typeDefs, resolvers }]),
-  })
-
   await connect()
 
   const { url } = await startStandaloneServer(server, {

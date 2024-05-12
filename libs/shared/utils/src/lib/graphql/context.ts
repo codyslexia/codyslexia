@@ -52,7 +52,7 @@ export function hasValidSecret(request: IncomingMessage) {
 
 export function isRouterAuthorized(request: IncomingMessage) {
   if (!hasValidSecret(request)) {
-    throw new GraphQLError('Invalid Router Authentication', {
+    throw new GraphQLError('Invalid Router Authorization', {
       extensions: {
         code: 'UNAUTHORIZED',
         http: { status: 401 },

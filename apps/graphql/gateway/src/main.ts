@@ -6,12 +6,18 @@ import { ApolloServer } from '@apollo/server'
 import { ApolloGateway, RemoteGraphQLDataSource } from '@apollo/gateway'
 import { startStandaloneServer } from '@apollo/server/standalone'
 
-const APOLLO_PORT = Number(process.env.PORT || 4000)
+process.on('uncaughtException', (erro: Error) => {
+  console.log(`Erro Nodejs: Uncaught Exception`)
+  console.error(erro.name, erro.message, erro.stack)
+  process.exit(1)
+})
 
 const plugins = [
   D.ApolloServerPluginInlineTraceDisabled(),
   D.ApolloServerPluginUsageReportingDisabled(),
 ]
+
+const APOLLO_PORT = Number(process.env.PORT ?? 4000)
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
   willSendRequest({ request }) {

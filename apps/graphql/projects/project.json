@@ -13,7 +13,7 @@
         "platform": "node",
         "outputPath": "dist/apps/graphql/projects",
         "format": ["cjs"],
-        "bundle": true,
+        "bundle": false,
         "main": "apps/graphql/projects/src/main.ts",
         "tsConfig": "apps/graphql/projects/tsconfig.app.json",
         "assets": [

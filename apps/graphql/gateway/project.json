@@ -53,7 +53,7 @@
       ],
       "outputs": ["{projectRoot}/src/supergraph.graphql"],
       "options": {
-        "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.dev.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"
+        "command": "rover supergraph compose --config {projectRoot}/src/config/supergraph.local.yaml --output {projectRoot}/src/supergraph.graphql --elv2-license=accept"
       }
     },
     "docker": {
