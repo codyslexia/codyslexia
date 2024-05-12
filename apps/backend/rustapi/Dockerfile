@@ -1,13 +1,44 @@
-FROM rust:1.54 as builder
+# [builder]
+FROM rust:alpine3.19 AS builder
+
+WORKDIR /usr/src/
+
+RUN apk add --no-cache musl-dev ca-certificates cmake musl-utils libressl-dev
+
+RUN rustup target add x86_64-unknown-linux-musl
+
+RUN USER=root cargo new rustapi
 
 WORKDIR /usr/src/rustapi
 
-COPY . .
+COPY Cargo.toml ./
 
-RUN cargo install --path .
+RUN RUSTFLAGS='-C target-cpu=native' cargo build --release
 
-FROM debian:buster-slim
+COPY src ./src
 
-COPY --from=builder /usr/local/cargo/bin/rustapi /usr/local/bin/rustapi
+ENV PKG_CONFIG_ALLOW_CROSS=1
 
-CMD ["rustapi"]
+RUN cargo install --target x86_64-unknown-linux-musl --path .
+
+# [compressor]
+FROM alpine:3.19 AS compressor
+
+WORKDIR /usr/app
+
+RUN apk add --no-cache upx binutils
+
+COPY --from=builder /usr/local/cargo/bin/rustapi .
+
+RUN strip rustapi -o app-striped
+
+RUN upx app-striped --best --lzma -o app
+
+# [runner]
+FROM scratch
+
+COPY --from=compressor /usr/app/app .
+
+EXPOSE 3000
+
+CMD ["./app"]

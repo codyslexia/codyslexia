@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rustapi
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codyslexia
+      component: rustapi
+  template:
+    metadata:
+      labels:
+        app: codyslexia
+        component: rustapi
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+        - name: rustapi
+          image: ghcr.io/codyslexia/rustapi
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: rustapi
+          env:
+            - name: APP_NAME
+              value: 'rustapi'
+            - name: PORT
+              value: '3000'
+          resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
+            limits:
+              memory: '1000M'
+              cpu: '1000m'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rustapi
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: rustapi
+spec:
+  selector:
+    app: codyslexia
+    component: rustapi
+  ports:
+    - name: rustapi
+      protocol: TCP
+      port: 80
+      targetPort: rustapi

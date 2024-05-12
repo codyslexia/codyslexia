@@ -5,14 +5,6 @@
   "projectType": "application",
   "tags": ["language:typescript", "layer:backend"],
   "targets": {
-    "docker": {
-      "executor": "@plugins/workspace:docker",
-      "outputs": ["{option.outputPath}"],
-      "dependsOn": ["build"],
-      "options": {
-        "outputPath": "dist/apps/services/totp-api"
-      }
-    },
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
@@ -45,6 +37,21 @@
         }
       }
     },
+    "docker": {
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
+      "dependsOn": ["build"],
+      "options": {
+        "outputPath": "dist/apps/services/totp-api"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["{projectRoot}/"]
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
@@ -58,13 +65,6 @@
         "production": {
           "buildTarget": "totp-api:build:production"
         }
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["{projectRoot}/"]
       }
     },
     "test": {

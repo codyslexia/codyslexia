@@ -8,11 +8,11 @@ module github.com/codyslexia/codyslexia
 // compatible with `amazon-linux-extras install golang1.11`
 go 1.11
 
-require (
-	github.com/gin-gonic/gin v1.9.1
-	github.com/stretchr/testify v1.9.0
-)
-
 replace github.com/codyslexia/go/modules/loggo => ./libs/backend/loggo
 
 replace github.com/codyslexia/go/modules/utils => ./libs/backend/utils
+
+require (
+	github.com/gin-gonic/gin v1.10.0
+	github.com/stretchr/testify v1.9.0
+)

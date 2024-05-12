@@ -38,6 +38,14 @@
         }
       }
     },
+    "docker": {
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
+      "dependsOn": ["build"],
+      "options": {
+        "outputPath": "dist/apps/services/qrcode-api"
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
@@ -59,10 +67,6 @@
       "options": {
         "jestConfig": "{projectRoot}/jest.config.ts"
       }
-    },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f apps/services/qrcode-api/Dockerfile . -t api-qrcode"
     }
   }
 }

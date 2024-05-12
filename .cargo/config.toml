@@ -11,9 +11,11 @@ target-dir = 'dist/target'
 [target.x86_64-unknown-linux-musl]
 # disables the use of the C runtime library, which can result in smaller binary sizes and faster startup times
 rustflags = ["-C", "target-feature=-crt-static"]
+linker = "x86_64-linux-musl-gcc"
 
 [target.aarch64-unknown-linux-musl]
 # necessary because the default linker may not be compatible with the target architecture
 linker = "aarch64-linux-musl-gcc"
 # disables the use of the C runtime library
 rustflags = ["-C", "target-feature=-crt-static"]
+

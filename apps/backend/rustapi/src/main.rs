@@ -16,7 +16,7 @@ pub struct StatusResponse {
     pub timestamp: Option<DateTime<Utc>>,
 }
 
-#[get("/status")]
+#[get("/")]
 async fn status() -> impl Responder {
     let response = StatusResponse {
         app: Some("rustapi"),
@@ -36,7 +36,12 @@ async fn not_found() -> Result<HttpResponse> {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let _ = HttpServer::new(|| {
+    let addr = match std::env::var("SERVER_HOST") {
+        Ok(host) => host,
+        Err(_e) => "127.0.0.1:3000".to_string(),
+    };
+
+    let server = HttpServer::new(|| {
         let cors = Cors::default()
             .allow_any_origin()
             .allow_any_method()
@@ -48,9 +53,11 @@ async fn main() -> std::io::Result<()> {
             .service(status)
             .default_service(web::route().to(not_found))
     })
-    .bind(("127.0.0.1", 8003))?
-    .run()
-    .await;
+    .bind(&addr)?;
+
+    println!("[rustapi] READY Server running at http://{}", addr);
+
+    let _ = server.run().await;
 
     Ok(())
 }

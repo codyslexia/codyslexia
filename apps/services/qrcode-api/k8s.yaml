@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qrcode-api
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codyslexia
+      component: qrcode-api
+  template:
+    metadata:
+      labels:
+        app: codyslexia
+        component: qrcode-api
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+        - name: qrcode-api
+          image: ghcr.io/codyslexia/qrcode-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: qrcode-api
+          env:
+            - name: APP_NAME
+              value: 'qrcode-api'
+            - name: PORT
+              value: '3000'
+          resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
+            limits:
+              memory: '1000M'
+              cpu: '1000m'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qrcode-api
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: qrcode-api
+spec:
+  selector:
+    app: codyslexia
+    component: qrcode-api
+  ports:
+    - name: qrcode-api
+      protocol: TCP
+      port: 80
+      targetPort: qrcode-api

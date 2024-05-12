@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goapi
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codyslexia
+      component: goapi
+  template:
+    metadata:
+      labels:
+        app: codyslexia
+        component: goapi
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+        - name: goapi
+          image: ghcr.io/codyslexia/goapi
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: goapi
+          env:
+            - name: APP_NAME
+              value: 'goapi'
+            - name: PORT
+              value: '3000'
+          resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
+            limits:
+              memory: '1000M'
+              cpu: '1000m'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goapi
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: goapi
+spec:
+  selector:
+    app: codyslexia
+    component: goapi
+  ports:
+    - name: goapi
+      protocol: TCP
+      port: 80
+      targetPort: goapi

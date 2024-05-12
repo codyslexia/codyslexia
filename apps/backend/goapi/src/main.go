@@ -55,10 +55,10 @@ func not_found(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
-	router.Any("/", not_found)
+	router.GET("/", status)
 	router.Any("/:any", not_found)
 	router.GET("/books", books)
 	router.GET("/status", status)
 
-	router.Run("localhost:8001")
+	router.Run(":3000")
 }

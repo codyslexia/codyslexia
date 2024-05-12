@@ -1,37 +1,37 @@
 # [base]
-FROM golang:1.20-alpine AS base
+FROM golang:alpine3.19
 
+# set environment variables
+ENV HOST=0.0.0.0
+ENV PORT=3000
+
+# install os dependencies
 RUN apk add --no-cache tini
 
+# set current directory
 WORKDIR /app
 
+# create 'base' entrypoint
 ENTRYPOINT [ "/sbin/tini", "--" ]
 
-# [builder]
-FROM base AS builder
+# create a system group and user for the service
+RUN addgroup --system goapi && \
+  adduser --system -G goapi goapi
 
-COPY go.mod .
+# copy the compiled app to the 'runner' image
+COPY dist/apps/backend/goapi .
 
-RUN go mod download
+# recursively change ownership of the app to the non-root user
+RUN chown -R goapi:goapi .
 
-COPY . .
+# run as non-root user
+USER goapi
 
-RUN go build -o main
+# ensure the app is executable
+RUN chmod +x goapi
 
-# [runner]
-FROM base AS runner
+# ephemeral port
+EXPOSE $PORT
 
-WORKDIR /
-
-RUN adduser -D -s /bin/ash nonroot
-
-WORKDIR /home/nonroot/app
-
-COPY --chown=nonroot:nonroot --from=builder /app/static ./static
-COPY --chown=nonroot:nonroot --from=builder /app/main ./
-
-USER nonroot
-
-EXPOSE 3000
-
-CMD [ "/home/nonroot/app/main" ]
+# run 'goapi' in watch mode
+CMD [ "./goapi" ]

@@ -5,7 +5,7 @@ use serde_json::json;
 async fn test_status() {
     let mut app = test::init_service(App::new().service(super::status)).await;
 
-    let req = test::TestRequest::get().uri("/status").to_request();
+    let req = test::TestRequest::get().uri("/").to_request();
     let resp = test::call_service(&mut app, req).await;
 
     assert!(resp.status().is_success());

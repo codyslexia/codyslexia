@@ -17,6 +17,13 @@
         }
       }
     },
+    "docker": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "docker build -t ghcr.io/codyslexia/rustapi ."
+      }
+    },
     "lint": {
       "cache": true,
       "executor": "@plugins/rust:lint",

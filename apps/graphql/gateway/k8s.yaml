@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-gateway
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codyslexia
+      component: graphql-gateway
+  template:
+    metadata:
+      labels:
+        app: codyslexia
+        component: graphql-gateway
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+        - name: graphql-gateway
+          image: ghcr.io/codyslexia/graphql-gateway
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: graphql-gateway
+          env:
+            - name: APP_NAME
+              value: 'graphql-gateway'
+            - name: PORT
+              value: '3000'
+          resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
+            limits:
+              memory: '1000M'
+              cpu: '1000m'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql-gateway
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: graphql-gateway
+spec:
+  selector:
+    app: codyslexia
+    component: graphql-gateway
+  ports:
+    - name: graphql-gateway
+      protocol: TCP
+      port: 80
+      targetPort: graphql-gateway

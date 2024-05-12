@@ -107,6 +107,7 @@ app.post('/recover', async (req, res) => {
 
 app.get('*', (_, res) => {
   res.status(HttpStatus.NOT_FOUND).json({
+    app: config.get('APP_NAME'),
     status: HttpStatus.NOT_FOUND,
     message: `The endpoint you're looking for doesn't exist or couldn't be found.`,
   })

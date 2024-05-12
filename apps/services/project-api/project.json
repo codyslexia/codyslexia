@@ -68,7 +68,7 @@
         "jestConfig": "{projectRoot}/jest.config.ts"
       }
     },
-    "docker": {
+    "xdocker": {
       "executor": "nx:run-commands",
       "dependsOn": ["build"],
       "defaultConfiguration": "build",

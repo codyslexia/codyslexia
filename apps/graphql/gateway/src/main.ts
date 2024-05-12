@@ -21,7 +21,7 @@ class AuthenticatedDataSource extends RemoteGraphQLDataSource {
 
 const supergraphSchema = readFileSync(
   // TODO: @moatorres - Add logic to handle different environments
-  resolve(process.cwd(), 'apps/graphql/gateway/src/supergraph.graphql')
+  resolve(__dirname, './supergraph.graphql')
 )
 
 const gateway = new ApolloGateway({

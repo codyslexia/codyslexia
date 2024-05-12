@@ -8,7 +8,13 @@
 import { Faker, en } from '@faker-js/faker'
 import { generateMockData } from '../../../../module/generate-mock-data'
 
-import { ExpressServer, DotenvConfigLoader, InMemoryConfigStore, ConsoleLogger } from '@shared/core'
+import {
+  ExpressServer,
+  DotenvConfigLoader,
+  InMemoryConfigStore,
+  ConsoleLogger,
+  HttpStatus,
+} from '@shared/core'
 
 const getTimestamp = () => {
   const currentDate = new Date()
@@ -44,38 +50,54 @@ const data = Array.from({ length: 10 }, () => ({
   phone: faker.phone.number(),
 }))
 
-app
-  .get('/', (req, res) => {
-    try {
-      const EXAMPLE = {
-        count: 3,
-        schema: {
-          name: 'person.firstName',
-          email: 'internet.email',
-          phone: 'phone.number',
-        },
-      }
+app.post('/schema', (req, res) => {
+  const { schema, count = 1, locale = 'en' } = req.body
+  res.json(generateMockData({ schema, count, locale }))
+})
 
-      res.json({
-        app: config.get('APP_NAME'),
-        version: '1.0.0',
-        timestamp: getTimestamp(),
-        description: 'Dynamically generate mock data using Faker.js',
-        example: {
-          method: 'POST',
-          endpoint: '/faker',
-          body: EXAMPLE,
-          results: generateMockData(EXAMPLE),
-        },
-      })
-    } catch (error) {
-      console.error(error)
-      res.status(500).json({ error: error.message })
+app.get('/example', (req, res) => {
+  try {
+    const EXAMPLE = {
+      count: 3,
+      schema: {
+        name: 'person.firstName',
+        email: 'internet.email',
+        phone: 'phone.number',
+      },
     }
+
+    res.json({
+      app: config.get('APP_NAME'),
+      version: '1.0.0',
+      timestamp: getTimestamp(),
+      description: 'Dynamically generate mock data using Faker.js',
+      example: {
+        method: 'POST',
+        endpoint: '/faker',
+        body: EXAMPLE,
+        results: generateMockData(EXAMPLE),
+      },
+    })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.get('/', (req, res) => {
+  res.json({
+    app: config.get('APP_NAME'),
+    version: '1.0.0',
+    timestamp: getTimestamp(),
   })
-  .post('/faker', (req, res) => {
-    const { schema, count = 1, locale = 'en' } = req.body
-    res.json(generateMockData({ schema, count, locale }))
+})
+
+app.get('*', (_, res) => {
+  res.status(HttpStatus.NOT_FOUND).json({
+    app: config.get('APP_NAME'),
+    status: HttpStatus.NOT_FOUND,
+    message: `The endpoint you're looking for doesn't exist or couldn't be found.`,
   })
+})
 
 server.start()

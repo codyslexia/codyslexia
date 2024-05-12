@@ -2,26 +2,26 @@ federation_version: =2.5.4
 
 subgraphs:
   users:
-    routing_url: http://localhost:4001/
+    routing_url: http://localhost:4001/ # graphql-users.dev.svc.cluster.local
     schema:
       base: .
       file: '../../../../graphql/users/src/schema.graphql'
       graphref: codyslexia@dev
       subgraph: users
-      subgraph_url: http://localhost:4001/
+      subgraph_url: http://localhost:4001/ # graphql-users.dev.svc.cluster.local
     request:
       - insert:
           name: 'Router-Authorization'
           value: env.USERS_SUBGRAPH_SECRET
 
   projects:
-    routing_url: http://localhost:4002/
+    routing_url: http://localhost:4002/ # graphql-proejcts.dev.svc.cluster.local
     schema:
       base: .
       file: '../../../../graphql/projects/src/schema.graphql'
       graphref: codyslexia@dev
       subgraph: projects
-      subgraph_url: http://localhost:4002/
+      subgraph_url: http://localhost:4002/ # graphql-projects.dev.svc.cluster.local
     request:
       - insert:
           name: 'Router-Authorization'

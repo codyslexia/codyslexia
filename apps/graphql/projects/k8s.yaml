@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graphql-projects
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: codyslexia
+      component: graphql-projects
+  template:
+    metadata:
+      labels:
+        app: codyslexia
+        component: graphql-projects
+    spec:
+      imagePullSecrets:
+        - name: github-registry
+      containers:
+        - name: graphql-projects
+          image: ghcr.io/codyslexia/graphql-projects
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+              name: graphql-projects
+          env:
+            - name: APP_NAME
+              value: 'graphql-projects'
+            - name: PORT
+              value: '3000'
+          resources:
+            requests:
+              memory: '640M'
+              cpu: '100m'
+            limits:
+              memory: '1000M'
+              cpu: '1000m'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: graphql-projects
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: graphql-projects
+spec:
+  selector:
+    app: codyslexia
+    component: graphql-projects
+  ports:
+    - name: graphql-projects
+      protocol: TCP
+      port: 80
+      targetPort: graphql-projects

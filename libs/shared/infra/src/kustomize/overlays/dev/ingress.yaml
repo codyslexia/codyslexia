@@ -32,3 +32,31 @@ spec:
                 name: totp-api
                 port:
                   number: 80
+          - path: /api/qrcode(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: qrcode-api
+                port:
+                  number: 80
+          - path: /api/goapi(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: goapi
+                port:
+                  number: 80
+          - path: /api/rustapi(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: rustapi
+                port:
+                  number: 80
+          - path: /graphql
+            pathType: Prefix
+            backend:
+              service:
+                name: graphql-gateway
+                port:
+                  number: 80

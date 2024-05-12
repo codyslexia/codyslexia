@@ -20,7 +20,7 @@
           {
             "glob": "**/*.graphql",
             "input": "{projectRoot}/src",
-            "output": "/"
+            "output": "apps/graphql/users/src/"
           }
         ],
         "generatePackageJson": true,
@@ -48,31 +48,11 @@
       }
     },
     "docker": {
-      "executor": "nx:run-commands",
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
       "dependsOn": ["build"],
-      "defaultConfiguration": "build",
       "options": {
-        "args": "--image ghcr.io/codyslexia/{projectName}:latest"
-      },
-      "configurations": {
-        "build": {
-          "command": "docker buildx build -f {projectRoot}/Dockerfile . -t {args.image}"
-        },
-        "push": {
-          "command": "docker push {args.image}"
-        },
-        "run": {
-          "command": "docker run --name {projectName} -it -d -p 3000:3000 {args.image}"
-        },
-        "start": {
-          "command": "docker start {projectName}"
-        },
-        "stop": {
-          "command": "docker stop {projectName}"
-        },
-        "remove": {
-          "command": "docker rm {projectName}"
-        }
+        "outputPath": "dist/apps/graphql/users"
       }
     },
     "lint": {

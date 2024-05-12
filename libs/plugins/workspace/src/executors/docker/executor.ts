@@ -84,7 +84,7 @@ CMD [ "pm2-runtime", "${context.projectName}", "--watch" ]
       // ghcr.io/codyslexia/sandbox
       [registry, organisation, context.projectName].join('/').toLowerCase()
 
-    const dockerfilePath = resolve(context.cwd, 'tmp/.nexa/Dockerfile')
+    const dockerfilePath = resolve(context.cwd, `tmp/.nexa/Dockerfile-${context.projectName}`)
     await writeFile(dockerfilePath, dockerfileContent)
 
     // Construct the docker build command
