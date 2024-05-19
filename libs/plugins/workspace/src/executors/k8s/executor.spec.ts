@@ -1,13 +1,15 @@
 import {} from '@nx/devkit/testing'
-import { DockerBuildExecutorSchema } from './schema'
+import { K8sManifestSchema } from './schema'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const options: DockerBuildExecutorSchema = {
-  outputPath: 'dist/apps/workspace',
-  sourceRoot: 'apps/workspace',
-  imageName: 'workspace',
-  registry: 'ghcr.io',
-  organisation: 'codyslexia',
+const options: K8sManifestSchema = {
+  appLabelName: 'appLabelName',
+  imageName: 'imageName',
+  namespace: 'namespace',
+  organisation: 'organisation',
+  registry: 'registry',
+  labels: {},
+  dryRun: true,
 }
 
 describe('Build Executor', () => {

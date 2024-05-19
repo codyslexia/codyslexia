@@ -8,7 +8,7 @@ export abstract class AggregateRoot<T> extends Entity<T> {
     return this._events
   }
 
-  protected addEvent(event: DomainEvent): void {
+  public addEvent(event: DomainEvent): void {
     this._events.push(event)
     DomainEvents.add(this)
     this.log(event)

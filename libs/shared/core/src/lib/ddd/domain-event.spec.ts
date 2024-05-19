@@ -12,4 +12,10 @@ describe('libs/common/ddd/domain-event', () => {
     DomainEvents.dispatchById(event.getAggregateId())
     expect(handler).toHaveBeenCalledWith(event)
   })
+
+  it('should add and remove aggregates', () => {
+    const aggregate = { id: new UniqueEntityID() } as any
+    DomainEvents.add(aggregate)
+    expect(DomainEvents['aggregates']).toContain(aggregate)
+  })
 })
