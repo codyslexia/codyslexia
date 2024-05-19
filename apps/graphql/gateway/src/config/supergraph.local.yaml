@@ -12,7 +12,7 @@ subgraphs:
     request:
       - insert:
           name: 'Router-Authorization'
-          value: env.USERS_SUBGRAPH_SECRET
+          value: env.USERS_SUBGRAPH_ROUTER_SECRET
 
   projects:
     routing_url: http://graphql-projects.dev.svc.cluster.local
@@ -25,7 +25,7 @@ subgraphs:
     request:
       - insert:
           name: 'Router-Authorization'
-          value: env.PROJECTS_SUBGRAPH_SECRET
+          value: env.PROJECTS_SUBGRAPH_ROUTER_SECRET
 
 headers:
   all:
@@ -37,12 +37,12 @@ headers:
       request:
         - insert:
             name: 'Router-Authorization'
-            value: env.USERS_SUBGRAPH_SECRET
+            value: env.USERS_SUBGRAPH_ROUTER_SECRET
     projects:
       request:
         - insert:
             name: 'Router-Authorization'
-            value: env.PROJECTS_SUBGRAPH_SECRET
+            value: env.PROJECTS_SUBGRAPH_ROUTER_SECRET
 
 cors:
   allow_any_origin: true

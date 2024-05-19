@@ -1,22 +1,18 @@
 {
   "/api/faker": {
-    "target": "http://localhost:3001",
+    "target": "http://local.dev/api/faker",
     "secure": false
   },
   "/api/qrcode": {
-    "target": "http://localhost:3002",
+    "target": "http://local.dev/api/qrcode",
     "secure": false
   },
   "/auth/totp": {
-    "target": "http://localhost:3003",
-    "secure": false
-  },
-  "/auth/webauthn": {
-    "target": "http://localhost:3004",
+    "target": "http://local.dev/api/totp",
     "secure": false
   },
   "/graphql": {
-    "target": "http://localhost:4000",
+    "target": "http://local.dev/graphql",
     "secure": false
   }
 }

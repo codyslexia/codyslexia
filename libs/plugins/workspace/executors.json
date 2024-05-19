@@ -5,6 +5,11 @@
       "implementation": "./src/executors/docker/executor",
       "schema": "./src/executors/docker/schema.json",
       "description": "Build a Docker image for a Node.js application"
+    },
+    "k8s": {
+      "implementation": "./src/executors/k8s/executor",
+      "schema": "./src/executors/k8s/schema.json",
+      "description": "Create a Kubernetes Deployment for a Node.js application"
     }
   }
 }

@@ -64,6 +64,13 @@
         "outputPath": "dist/apps/graphql/gateway"
       }
     },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/graphql-gateway/k8s"
+      }
+    },
     "lint": {
       "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],

@@ -5,14 +5,6 @@
   "projectType": "application",
   "tags": ["language:typescript", "layer:backend"],
   "targets": {
-    "docker": {
-      "executor": "@plugins/workspace:docker",
-      "outputs": ["{option.outputPath}"],
-      "dependsOn": ["^build"],
-      "options": {
-        "outputPath": "dist/apps/services/faker-api"
-      }
-    },
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
@@ -43,6 +35,21 @@
             }
           }
         }
+      }
+    },
+    "docker": {
+      "executor": "@plugins/workspace:docker",
+      "outputs": ["{option.outputPath}"],
+      "dependsOn": ["^build"],
+      "options": {
+        "outputPath": "dist/apps/services/faker-api"
+      }
+    },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/faker-api/k8s"
       }
     },
     "serve": {

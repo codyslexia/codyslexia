@@ -24,6 +24,13 @@
         "command": "docker build -t ghcr.io/codyslexia/rustapi ."
       }
     },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/rustapi/k8s"
+      }
+    },
     "lint": {
       "cache": true,
       "executor": "@plugins/rust:lint",

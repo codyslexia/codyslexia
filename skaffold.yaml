@@ -25,21 +25,8 @@ requires:
     path: libs/shared/infra/src/helm/prometheus-operator/skaffold.yaml
   - configs: ['redis']
     path: libs/shared/infra/src/helm/redis.yaml
-  # - configs: ['stackgres']
-  #   path: libs/shared/infra/src/helm/stackgres.yaml
-
-# build:
-#   local:
-#     concurrency: 1
-#     push: false
-#     useDockerCLI: true
-#   artifacts:
-#     - image: ghcr.io/codyslexia/faker-api
-#       platforms: ['linux/amd64']
-#       docker:
-#         dockerfile: apps/services/faker-api/Dockerfile
-#   tagPolicy:
-#     sha256: {}
+  - configs: ['stackgres']
+    path: libs/shared/infra/src/helm/stackgres.yaml
 
 deploy:
   kubeContext: docker-desktop
@@ -51,15 +38,7 @@ deploy:
 
 manifests:
   rawYaml:
-    - apps/backend/goapi/k8s.yaml
-    - apps/backend/rustapi/k8s.yaml
-    - apps/graphql/gateway/k8s.yaml
-    - apps/graphql/projects/k8s.yaml
-    - apps/graphql/users/k8s.yaml
-    - apps/services/faker-api/k8s.yaml
-    - apps/services/qrcode-api/k8s.yaml
-    - apps/services/totp-api/k8s.yaml
-    # - https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.0/deploy/static/provider/cloud/deploy.yaml
+    - .nexa/**/k8s/*.yaml
   kustomize:
     buildArgs: []
     paths:
@@ -85,3 +64,35 @@ profiles:
         remoteManifests:
           - libs/shared/infra/src/kustomize/overlays/dev
       helm: {}
+    build:
+      local:
+        concurrency: 1
+        push: false
+        useDockerCLI: true
+      tagPolicy:
+        sha256: {}
+      artifacts:
+        - image: ghcr.io/codyslexia/faker-api
+          context: .
+          docker:
+            dockerfile: .nexa/faker-api/Dockerfile
+
+        - image: ghcr.io/codyslexia/goapi
+          context: .
+          docker:
+            dockerfile: apps/backend/goapi/Dockerfile
+
+        - image: ghcr.io/codyslexia/qrcode-api
+          context: .
+          docker:
+            dockerfile: .nexa/qrcode-api/Dockerfile
+
+        - image: ghcr.io/codyslexia/rustapi
+          context: apps/backend/rustapi
+          docker:
+            dockerfile: apps/backend/rustapi/Dockerfile
+
+        - image: ghcr.io/codyslexia/totp-api
+          context: .
+          docker:
+            dockerfile: .nexa/totp-api/Dockerfile

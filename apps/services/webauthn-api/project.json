@@ -38,6 +38,13 @@
         }
       }
     },
+    "xk8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/webauthn-api/k8s"
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",

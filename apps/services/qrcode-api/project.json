@@ -46,6 +46,13 @@
         "outputPath": "dist/apps/services/qrcode-api"
       }
     },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/qrcode-api/k8s"
+      }
+    },
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",

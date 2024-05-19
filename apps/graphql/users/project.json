@@ -55,6 +55,13 @@
         "outputPath": "dist/apps/graphql/users"
       }
     },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/graphql-users/k8s"
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"]

@@ -30,6 +30,16 @@ spec:
               value: 'graphql-users'
             - name: PORT
               value: '3000'
+            - name: ROUTER_AUTHORIZATION
+              value: 'e1f4b876c8ae3233a10142e96a849b893e89e57d2619677593a3cb457cefbca90e9cb455c5e49d65a77f3e64a2a260f67f0ecaeafcef5037877787f7e0804e6c26a9407ab7c2ad62e92e4219ea765e3b06a2fe549b251f8197f69d6d3afe848d01b3841515dd7c68c6e992ade1a57a01e6ce2598a2bf367c1a93a8be9e79b39ce7ba512e1602b4e06df74c805b59b11a58db6d121a7774a07d85b8598077eafd3c4b7164cab327304a34c0adcab03e1981997dbea2304645270a00bf87d703165befeaaadce03a9a489c7e94e9a88bb2a5a3f308831c2b59fec43c6a078d4ece6c795df09ea9483f0c29b23e65e3909339b13e956354d8d7ba2ed24a7b0b117d'
+            - name: NEXA_DATABASE_MONGODB_NAME
+              value: 'codyslexia'
+            - name: NEXA_DATABASE_MONGODB_USER
+              value: 'dev'
+            - name: NEXA_DATABASE_MONGODB_PASSWORD
+              value: 'Dp5WgoI2WJv6cNL3'
+            - name: NEXA_DATABASE_MONGODB_URI
+              value: 'mongodb+srv://dev:Dp5WgoI2WJv6cNL3@sandboxcluster.lcvyyuy.mongodb.net/?retryWrites=true&w=majority&appName=SandboxCluster'
           resources:
             requests:
               memory: '640M'

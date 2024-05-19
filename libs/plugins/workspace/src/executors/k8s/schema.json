@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "outputCapture": "direct-nodejs",
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "title": "K8s Manifest Target",
+  "description": "K8s Manifest Target.",
+  "type": "object",
+  "properties": {
+    "appLabelName": { "type": "string", "default": "codsylexia" },
+    "imageName": { "type": "string" },
+    "namespace": { "type": "string" },
+    "organisation": { "type": "string" },
+    "registry": { "type": "string" },
+    "labels": { "type": "object" }
+  },
+  "required": []
+}

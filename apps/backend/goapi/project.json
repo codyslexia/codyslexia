@@ -23,6 +23,13 @@
         "command": "docker build -t ghcr.io/codyslexia/goapi -f apps/backend/goapi/Dockerfile . --no-cache"
       }
     },
+    "k8s": {
+      "executor": "@plugins/workspace:k8s",
+      "outputs": ["{option.outputPath}"],
+      "options": {
+        "outputPath": ".nexa/goapi/k8s"
+      }
+    },
     "lint": {
       "executor": "@plugins/golang:lint",
       "cache": true

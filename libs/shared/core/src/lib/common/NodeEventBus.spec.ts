@@ -22,7 +22,7 @@ describe('NodeEventBus', () => {
       const listener = jest.fn()
       await eventBus.subscribe('topic', listener)
       await eventBus.publish('topic', 'data')
-      expect(listener).toBeCalledWith('data')
+      expect(listener).toHaveBeenCalledWith('data')
     })
   })
 
@@ -31,7 +31,7 @@ describe('NodeEventBus', () => {
       const listener = jest.fn()
       await eventBus.subscribe('topic', listener)
       eventEmitter.emit('topic', 'data')
-      expect(listener).toBeCalledWith('data')
+      expect(listener).toHaveBeenCalledWith('data')
     })
   })
 })

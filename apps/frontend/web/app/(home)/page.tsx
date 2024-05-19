@@ -1,9 +1,8 @@
-import { CheckCircledIcon, CrossCircledIcon } from '@radix-ui/react-icons'
+import Image from 'next/image'
+import { CheckCircledIcon, CrossCircledIcon, InfoCircledIcon } from '@radix-ui/react-icons'
 import {
-  Avatar,
   Badge,
   Box,
-  Button,
   Card,
   Code,
   Grid,
@@ -15,33 +14,17 @@ import {
   Text,
 } from '@radix-ui/themes'
 
-import TOTPPage from '../../components/totp'
 import { CreateProjectButton } from '../../components/create-project-button'
+import { getTotp } from '../../components/get-totp'
 
 const Home = async () => {
+  const [{ id, secret, backup, image }] = await getTotp()
   return (
     <>
-      {/* Nav */}
+      {/* Header */}
       <Box>
         <Flex justify="between" align="center" m="2">
-          <Link size="4">c0dyslex1a</Link>
-          <Flex gap="6" align="center">
-            <Link size="2" color="gray">
-              login
-            </Link>
-            <Link size="2" color="gray">
-              register
-            </Link>
-            <Button variant="soft">LOGOUT</Button>
-            <Avatar fallback="M" radius="full" />
-          </Flex>
-        </Flex>
-      </Box>
-
-      {/* Header */}
-      <Box py="4">
-        <Flex justify="between" align="center" m="2">
-          <Heading color="green">pr0jects</Heading>
+          <h1>Apps & Systems</h1>
           <CreateProjectButton />
         </Flex>
       </Box>
@@ -62,7 +45,7 @@ const Home = async () => {
                   subgraph
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>user-graphql</Code> service is <Text color="green">up</Text>
+                  user-graphqlphql service is <Text color="green">up</Text>
                 </Text>
               </Flex>
               <Flex direction="row" align="center" py="1">
@@ -70,7 +53,7 @@ const Home = async () => {
                   node
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>user-manager</Code> service is <Text color="green">up</Text>
+                  user-manager service is <Text color="green">up</Text>
                 </Text>
               </Flex>
             </Card>
@@ -86,7 +69,7 @@ const Home = async () => {
                   subgraph
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>project-graphql</Code> service is <Text color="green">up</Text>
+                  project-graphql service is <Text color="green">up</Text>
                 </Text>
               </Flex>
               <Flex direction="row" align="center" py="1">
@@ -94,7 +77,7 @@ const Home = async () => {
                   node
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>project-manager</Code> service is <Text color="red">down</Text>
+                  project-manager service is <Text color="red">down</Text>
                 </Text>
               </Flex>
             </Card>
@@ -110,7 +93,7 @@ const Home = async () => {
                   worker
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>oauth-proxy</Code> service is <Text color="green">up</Text>
+                  oauth-proxy service is <Text color="green">up</Text>
                 </Text>
               </Flex>
               <Flex direction="row" align="center" py="1">
@@ -118,7 +101,7 @@ const Home = async () => {
                   node
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>oauth-totp</Code> service is <Text color="green">up</Text>
+                  oauth-totp service is <Text color="green">up</Text>
                 </Text>
               </Flex>
             </Card>
@@ -134,7 +117,7 @@ const Home = async () => {
                   worker
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>backup-worker</Code> service is <Text color="green">up</Text>
+                  backup-worker service is <Text color="green">up</Text>
                 </Text>
               </Flex>
               <Flex direction="row" align="center" py="1">
@@ -142,12 +125,43 @@ const Home = async () => {
                   node
                 </Badge>
                 <Text size="1" mx="2">
-                  <Code>backup-manager</Code> service is <Text color="green">up</Text>
+                  backup-manager service is <Text color="green">up</Text>
                 </Text>
               </Flex>
             </Card>
           </Grid>
-          <TOTPPage />
+
+          <Flex justify="between" py="4">
+            <h1>TOTP Multi-factor Authentication</h1>
+            <Image src={image} alt="qrcode" width={80} height={80} />
+          </Flex>
+
+          <Grid columns="3" gap="3">
+            {backup.map((backup: string, i: number) => (
+              <Card key={i}>
+                <Flex direction="row" justify="between" align="center" pb="2">
+                  <Code>{id}</Code>
+                  <IconButton variant="ghost" size="2">
+                    <CheckCircledIcon />
+                  </IconButton>
+                </Flex>
+                <Flex direction="row" align="center" py="1" gap="3">
+                  <Image src={image} alt="qrcode" width={80} height={80} />
+                  <Text size="1" mx="2">
+                    <Code>totp-api</Code> request: <Code>{backup}</Code>
+                  </Text>
+                </Flex>
+                <Flex justify="end">
+                  <IconButton variant="ghost" size="1">
+                    <Flex justify="between">
+                      <InfoCircledIcon style={{ marginInlineEnd: 4 }} />
+                      <Text style={{ fontSize: 10 }}>{new Date().toUTCString()}</Text>
+                    </Flex>
+                  </IconButton>
+                </Flex>
+              </Card>
+            ))}
+          </Grid>
         </Flex>
       </Box>
 

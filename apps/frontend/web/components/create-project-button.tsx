@@ -20,9 +20,9 @@ export const CreateProjectButton = () => {
             <Text as="div" size="2" mb="1" weight="bold">
               Name
             </Text>
-            <TextField.Input
-              defaultValue="auth-webauthn"
+            <TextField.Root
               placeholder="Enter the name of you project"
+              defaultValue="auth-webauthn"
             />
           </label>
           <label>

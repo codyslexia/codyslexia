@@ -1,11 +1,12 @@
-import { logger } from '@nx/devkit'
 import { spawn } from 'child_process'
-import { writeFile, unlink } from 'fs/promises'
+import { logger } from '@nx/devkit'
+import { resolve } from 'path'
 
 import type { ExecutorContext } from '@nx/devkit'
 import type { ChildProcessWithoutNullStreams } from 'child_process'
 import type { DockerBuildExecutorSchema } from './schema'
-import { resolve } from 'path'
+
+import { compareAndWrite } from '../k8s/executor'
 
 export default async function runExecutor(
   { registry = 'ghcr.io', organisation = 'codyslexia', ...options }: DockerBuildExecutorSchema,
@@ -13,7 +14,7 @@ export default async function runExecutor(
 ): Promise<{ success: boolean }> {
   try {
     const dockerfileContent = `# use alpine linux as our 'base' image
-FROM docker.io/node:alpine3.18
+FROM docker.io/node:22.2.0-alpine3.19
 
 # set args
 ARG HOST
@@ -84,8 +85,10 @@ CMD [ "pm2-runtime", "${context.projectName}", "--watch" ]
       // ghcr.io/codyslexia/sandbox
       [registry, organisation, context.projectName].join('/').toLowerCase()
 
-    const dockerfilePath = resolve(context.cwd, `tmp/.nexa/Dockerfile-${context.projectName}`)
-    await writeFile(dockerfilePath, dockerfileContent)
+    const dockerfilePath = resolve(context.cwd, `.nexa/${context.projectName}/Dockerfile`)
+    // await writeFile(dockerfilePath, dockerfileContent)
+
+    await compareAndWrite(dockerfilePath, dockerfileContent)
 
     // Construct the docker build command
     const dockerBuildCommand = ['docker', 'build', '-t', dockerImageName, '-f', dockerfilePath, '.']
@@ -109,7 +112,7 @@ CMD [ "pm2-runtime", "${context.projectName}", "--watch" ]
     })
 
     // Clean up temporary Dockerfile
-    await unlink(dockerfilePath)
+    // await unlink(dockerfilePath)
 
     return { success: true }
   } catch (error) {
