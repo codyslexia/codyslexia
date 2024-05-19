@@ -4,15 +4,18 @@
 # LICENSE file in the root directory of this source tree.
 
 ---
-apiVersion: skaffold/v4beta6
+apiVersion: skaffold/v4beta10
 kind: Config
 metadata:
-  name: stackgres
+  name: rancher
 deploy:
   helm:
     releases:
-      - name: stackgres-operator
+      - name: rancher
         namespace: dev
-        remoteChart: stackgres-charts/stackgres-operator
+        createNamespace: true
+        remoteChart: rancher-stable/rancher
         setValues:
-          grafana.autoEmbed: true
+          bootstrapPassword: 123123 # KmbiZc2bGMqtSqnr
+# rancher local KmbiZc2bGMqtSqnr
+# grafana user=admin password=prom-operator

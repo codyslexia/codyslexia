@@ -15,7 +15,7 @@ enum ProjectLanguages {
   CSharp = 'cs',
   Go = 'go',
   JavaScript = 'js',
-  Python = 'py',
+  // Python = 'py',
   Rust = 'rs',
   TypeScript = 'ts',
 }

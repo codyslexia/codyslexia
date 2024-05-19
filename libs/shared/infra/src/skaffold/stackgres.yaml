@@ -4,16 +4,15 @@
 # LICENSE file in the root directory of this source tree.
 
 ---
-apiVersion: skaffold/v4beta6
+apiVersion: skaffold/v4beta10
 kind: Config
 metadata:
-  name: redis
+  name: stackgres
 deploy:
   helm:
     releases:
-      - name: redis
+      - name: stackgres-operator
         namespace: dev
-        repo: https://charts.bitnami.com/bitnami
-        remoteChart: redis
+        remoteChart: stackgres-charts/stackgres-operator
         setValues:
-          architecture: standalone
+          grafana.autoEmbed: true

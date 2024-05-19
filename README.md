@@ -1,6 +1,6 @@
 <p style="text-align: center;">
-  <h1>Codyslexia</h1>
-  Streamlined Cloud Microservices in Go, Python, Rust & TypeScript
+  <h1>Nexa</h1>
+  Streamlined Cloud Microservices in Go, Rust & TypeScript
 </p>
 
 <div style="text-align: left;">
@@ -9,30 +9,28 @@
 
 </div>
 
-Codyslexia simplifies cloud-native microservice creation in Go, Python, Rust, and TypeScript. Build, test, and deploy with ease.
+Nexa simplifies cloud-native microservice development in Go, Rust, and TypeScript, helping you build, test, and deploy production-ready application faster.
 
-## Stack
+## Usage
 
-**Infra**
-[Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), [Kustomize](https://kustomize.io/), [Skaffold](https://skaffold.dev/), [Docker](https://www.docker.com/)
+Node.js Client
 
-**Components**
-[NGINX Ingress Controller](https://docs.nginx.com/nginx-ingress-controller/), [NATS JetStream](https://docs.nats.io/nats-concepts/jetstream), [cert-manager](https://cert-manager.io/), [HashiCorp Vault](https://www.vaultproject.io/), [Apollo Graphql](https://www.apollographql.com/), [MongoDB](https://www.mongodb.com/), [PostgreSQL](https://www.postgresql.org/)
+```ts
+import nexa from '@codyslexia/nexa'
 
-**Frameworks**
-Nx, React, Tamagui
+const app = nexa.api({ port: 3000 }) 🚀
+```
 
-**CI/CD**
-CircleCI, Github Actions
+CLI
 
-**Hosting**
-AWS, Google Cloud Platform, Vercel
+```sh
+nexa generate api qrcode-svc --port 3000
+```
 
-## Roadmap
+## Documentation
 
-- Application Generator
-- Project Management Dashboard
-- Schema-based REST API and GraphQL Generator
+> [!NOTE]  
+> Coming soon ✨
 
 <sub>⚡️ Powered by **OSS** — `< >` with ❤️ by [**Moa Torres**](https://github.com/moatorres)</sub>
 

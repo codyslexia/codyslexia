@@ -1,0 +1,90 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+rules:
+  - apiGroups: ['']
+    resources: ['pods']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: service-reader
+rules:
+  - apiGroups: ['']
+    resources: ['services']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deployment-manager
+rules:
+  - apiGroups: ['apps']
+    resources: ['deployments']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: secret-reader
+rules:
+  - apiGroups: ['']
+    resources: ['secrets']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configmap-manager
+rules:
+  - apiGroups: ['']
+    resources: ['configmaps']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pvc-manager
+rules:
+  - apiGroups: ['']
+    resources: ['persistentvolumeclaims']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pv-reader
+rules:
+  - apiGroups: ['']
+    resources: ['persistentvolumes']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: namespace-reader
+rules:
+  - apiGroups: ['']
+    resources: ['namespaces']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: node-reader
+rules:
+  - apiGroups: ['']
+    resources: ['nodes']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: event-reader
+rules:
+  - apiGroups: ['']
+    resources: ['events']
+    verbs: ['get', 'watch', 'list']

@@ -1,0 +1,19 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: mailhog
+requires:
+  - configs: []
+deploy:
+  helm:
+    releases:
+      - name: mailhog
+        remoteChart: mailhog
+        repo: https://codecentric.github.io/helm-charts
+        namespace: dev

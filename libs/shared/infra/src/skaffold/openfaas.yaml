@@ -4,17 +4,17 @@
 # LICENSE file in the root directory of this source tree.
 
 ---
-apiVersion: skaffold/v4beta6
+apiVersion: skaffold/v4beta10
 kind: Config
 metadata:
-  name: nginx-controller
+  name: openfaas
 requires:
-  - configs: ['cert-manager']
+  - configs: []
 deploy:
   helm:
     releases:
-      - name: ingress-nginx
-        remoteChart: ingress-nginx
-        repo: https://kubernetes.github.io/ingress-nginx
-        namespace: ingress-nginx
+      - name: openfaas
+        remoteChart: openfaas
+        repo: https://openfaas.github.io/faas-netes/
+        namespace: openfaas
         createNamespace: true

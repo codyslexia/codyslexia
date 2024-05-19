@@ -4,58 +4,26 @@
 # LICENSE file in the root directory of this source tree.
 
 ---
-apiVersion: skaffold/v4beta5
+apiVersion: skaffold/v4beta10
 kind: Config
-
 metadata:
   name: codyslexia
-
 requires:
-  - configs: ['cert-manager']
-    path: libs/shared/infra/src/helm/cert-manager/skaffold.yaml
-  - configs: ['mongodb-operator']
-    path: libs/shared/infra/src/helm/mongodb-operator/skaffold.yaml
-  - configs: ['nats-jetstream']
-    path: libs/shared/infra/src/helm/nats-jetstream/skaffold.yaml
-  - configs: ['nginx-controller']
-    path: libs/shared/infra/src/helm/nginx-controller/skaffold.yaml
-  - configs: ['vault']
-    path: libs/shared/infra/src/helm/vault/skaffold.yaml
-  - configs: ['prometheus-operator']
-    path: libs/shared/infra/src/helm/prometheus-operator/skaffold.yaml
-  - configs: ['redis']
-    path: libs/shared/infra/src/helm/redis.yaml
-  - configs: ['stackgres']
-    path: libs/shared/infra/src/helm/stackgres.yaml
-
-deploy:
-  kubeContext: docker-desktop
-  kubectl:
-    defaultNamespace: dev
-    remoteManifests:
-      - libs/shared/infra/src/kustomize/overlays/dev
-  helm: {}
-
-manifests:
-  rawYaml:
-    - .nexa/**/k8s/*.yaml
-  kustomize:
-    buildArgs: []
-    paths:
-      - libs/shared/infra/src/kustomize/overlays/dev
-
+  - configs: ['stack-core']
+    path: ./libs/shared/infra/src/skaffold/stack.yaml
 profiles:
   - name: dev
     activation:
       - command: dev
       - kubeContext: docker-desktop
-
     requiresAllActivations: true
-
     manifests:
+      rawYaml:
+        - .nexa/**/k8s/*.yaml
       kustomize:
         buildArgs: []
         paths:
+          # - .nexa/skaffold/dev # ?
           - libs/shared/infra/src/kustomize/overlays/dev
     deploy:
       kubeContext: docker-desktop
@@ -76,22 +44,18 @@ profiles:
           context: .
           docker:
             dockerfile: .nexa/faker-api/Dockerfile
-
         - image: ghcr.io/codyslexia/goapi
           context: .
           docker:
             dockerfile: apps/backend/goapi/Dockerfile
-
         - image: ghcr.io/codyslexia/qrcode-api
           context: .
           docker:
             dockerfile: .nexa/qrcode-api/Dockerfile
-
         - image: ghcr.io/codyslexia/rustapi
           context: apps/backend/rustapi
           docker:
             dockerfile: apps/backend/rustapi/Dockerfile
-
         - image: ghcr.io/codyslexia/totp-api
           context: .
           docker:

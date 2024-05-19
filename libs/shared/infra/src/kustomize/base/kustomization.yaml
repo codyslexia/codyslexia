@@ -11,9 +11,11 @@ components:
   - '../components/dnsutils'
   - '../components/mongodb'
   - '../components/nats-jetstream'
+  - '../components/openfaas'
 
 resources:
   - ./client-tls.yaml
   - ./github-registry-secret.yaml
   - ./issuer.yaml
+  - ./roles.yaml
   - ./server-tls.yaml

@@ -12,7 +12,7 @@ namespace: dev
 resources:
   - '../../base'
   - './ingress.yaml'
-  - './namespace.yaml'
+  # - './namespace.yaml'
 
 commonLabels:
   app: codyslexia

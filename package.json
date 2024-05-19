@@ -1,6 +1,6 @@
 {
   "name": "@codyslexia/source",
-  "description": "Streamlined Cloud Microservices in Go, Python, Rust, and TypeScript",
+  "description": "Streamlined Cloud Microservices in Go, Rust, and TypeScript",
   "homepage": "https://codyslexia.com",
   "license": "MIT",
   "private": "true",
