@@ -31,8 +31,8 @@
       }
     },
     "lint": {
-      "executor": "@plugins/golang:lint",
-      "cache": true
+      "cache": true,
+      "executor": "@plugins/golang:lint"
     },
     "serve": {
       "executor": "@plugins/golang:serve",
@@ -41,8 +41,8 @@
       }
     },
     "test": {
-      "executor": "@plugins/golang:test",
-      "cache": true
+      "cache": true,
+      "executor": "@plugins/golang:test"
     }
   }
 }

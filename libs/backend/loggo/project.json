@@ -6,6 +6,7 @@
   "tags": [],
   "targets": {
     "test": {
+      "cache": true,
       "executor": "@plugins/golang:test"
     },
     "lint": {
