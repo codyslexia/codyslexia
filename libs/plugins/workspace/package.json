@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@nx/devkit": "~19.0.2",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "dotenv": "^16.4.5",
+    "kubernetes-models": "^4.3.1",
+    "js-yaml": "^4.1.0"
   },
   "type": "commonjs",
   "main": "./src/index.js",
