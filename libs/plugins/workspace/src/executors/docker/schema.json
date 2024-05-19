@@ -6,20 +6,32 @@
   "description": "Docker Build Target.",
   "type": "object",
   "properties": {
+    "baseDockerImage": {
+      "type": "string",
+      "default": "docker.io/node:22.2.0-alpine3.19"
+    },
     "imageName": {
       "type": "string"
     },
+    "kind": {
+      "type": "string",
+      "enum": ["react", "nextjs", "nodejs", "graphql"],
+      "default": "nodejs"
+    },
+    "registry": {
+      "type": "string",
+      "default": "ghcr.io"
+    },
     "organisation": {
-      "type": "string"
+      "type": "string",
+      "default": "codyslexia"
     },
     "outputPath": {
       "type": "string"
     },
-    "registry": {
-      "type": "string"
-    },
-    "sourceRoot": {
-      "type": "string"
+    "standalone": {
+      "type": "boolean",
+      "default": false
     }
   },
   "required": ["outputPath"]

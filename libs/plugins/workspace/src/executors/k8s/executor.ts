@@ -13,243 +13,72 @@ import type { ChildProcessWithoutNullStreams } from 'child_process'
 import type { K8sManifestSchema } from './schema'
 
 import { envFileToJson } from '../../common/dotenv-to-json'
+import { DEFAULT_ORGANISATION, DEFAULT_REGISTRY } from '../../common/constants'
+
+import { projectAutoscaler } from './templates/project-autoscaler'
+import { projectDeployment } from './templates/project-deployment'
+import { projectService } from './templates/project-service'
+import { projectPdb } from './templates/project-pdb'
+import { projectSecret } from './templates/project-secret'
+
+export interface K8sManifestOptions extends K8sManifestSchema {
+  projectName?: string
+  dryRun?: string
+}
 
 export default async function runExecutor(
-  opts: K8sManifestSchema,
+  schema: K8sManifestSchema,
   context: ExecutorContext
 ): Promise<{ success: boolean }> {
-  function normalizeOptions(options: K8sManifestSchema): K8sManifestSchema {
-    return {
-      dryRun: false,
-      registry: 'ghcr.io',
-      organisation: 'codyslexia',
-      namespace: 'dev',
-      ...options,
-      labels: {
-        app: 'codyslexia',
-        component: context.projectName,
-        ...normalizeLabels(options.labels ?? {}),
-      },
-    }
-  }
-
   try {
-    const options = normalizeOptions(opts)
+    const options = normalizeOptions(schema, context)
 
-    const { registry, organisation } = options
+    const relativeProjectRoot = context.projectGraph.nodes[context.projectName].data.root
+    const absoluteProjectRoot = resolve(context.root, relativeProjectRoot)
 
-    const dockerImageName =
-      // <imageName>
-      options.imageName ??
-      // ghcr.io/codyslexia/sandbox
-      `${registry}/${organisation}/${context.projectName}` ??
-      // ghcr.io/codyslexia/sandbox
-      [registry, organisation, context.projectName].join('/').toLowerCase()
-
-    const projectRoot = resolve(
-      context.root,
-      context.projectGraph.nodes[context.projectName].data.root
-    )
-
-    const labels = {
-      app: 'codyslexia',
-      component: context.projectName,
-      ...options.labels,
-    }
-
-    const deployment = new Deployment({
-      metadata: {
-        name: context.projectName,
-        namespace: options.namespace,
-      },
-      spec: {
-        replicas: 1,
-        selector: {
-          matchLabels: labels,
-        },
-        template: {
-          metadata: {
-            labels: labels,
-          },
-          spec: {
-            affinity: {
-              podAntiAffinity: {
-                preferredDuringSchedulingIgnoredDuringExecution: [
-                  {
-                    podAffinityTerm: {
-                      labelSelector: {
-                        matchExpressions: [
-                          {
-                            key: 'app',
-                            operator: 'In',
-                            values: ['codyslexia'],
-                          },
-                        ],
-                      },
-                      topologyKey: 'kubernetes.io/hostname',
-                    },
-                    weight: 100,
-                  },
-                ],
-              },
-            },
-            topologySpreadConstraints: [
-              {
-                maxSkew: 1,
-                topologyKey: 'kubernetes.io/hostname',
-                whenUnsatisfiable: 'ScheduleAnyway',
-                labelSelector: {
-                  matchLabels: {
-                    app: 'codyslexia',
-                    component: context.projectName,
-                  },
-                },
-              },
-            ],
-            imagePullSecrets: [
-              {
-                name: 'github-registry',
-              },
-            ],
-            containers: [
-              {
-                name: context.projectName,
-                image: dockerImageName,
-                imagePullPolicy: 'IfNotPresent',
-                ports: [
-                  {
-                    containerPort: 3000,
-                    name: 'http',
-                  },
-                ],
-                envFrom: [
-                  {
-                    secretRef: {
-                      name: `${context.projectName}-secret`,
-                    },
-                  },
-                ],
-                resources: {
-                  requests: {
-                    memory: '640M',
-                    cpu: '100m',
-                  },
-                  limits: {
-                    memory: '1000M',
-                    cpu: '1000m',
-                  },
-                },
-              },
-            ],
-          },
-        },
-      },
-    })
-
-    const service = new Service({
-      metadata: {
-        name: context.projectName,
-        namespace: options.namespace,
-        labels: labels,
-      },
-      spec: {
-        selector: labels,
-        ports: [
-          {
-            name: context.projectName,
-            protocol: 'TCP',
-            port: 80,
-            targetPort: 'http',
-          },
-        ],
-      },
-    })
-
-    const autoscaler = new HorizontalPodAutoscaler({
-      metadata: {
-        name: `${context.projectName}-hpa`,
-        namespace: options.namespace,
-      },
-      spec: {
-        scaleTargetRef: {
-          apiVersion: 'apps/v1',
-          kind: 'Deployment',
-          name: context.projectName,
-        },
-        minReplicas: 1,
-        maxReplicas: 5,
-        metrics: [
-          {
-            type: 'Resource',
-            resource: {
-              name: 'cpu',
-              target: {
-                type: 'Utilization',
-                averageUtilization: 50,
-              },
-            },
-          },
-        ],
-      },
-    })
-
-    const pdb = new PodDisruptionBudget({
-      metadata: {
-        name: `${context.projectName}-pdb`,
-        namespace: options.namespace,
-      },
-      spec: {
-        selector: {
-          matchLabels: labels,
-        },
-        minAvailable: 1,
-      },
-    })
-
-    const projectDotenvPath = resolve(projectRoot, '.env')
-
+    const projectDotenvPath = resolve(absoluteProjectRoot, '.env')
     const environmentVariables = await envFileToJson(projectDotenvPath, false)
 
-    const secret = new Secret({
-      metadata: {
-        name: `${context.projectName}-secret`,
-        namespace: options.namespace,
-      },
-      type: 'Opaque',
-      data: Object.fromEntries(
-        Object.entries(environmentVariables).map(([key, value]) => [
-          key.toUpperCase(),
-          value.toString(),
-        ])
-      ),
-    })
+    const autoscaler = projectAutoscaler(options)
+    const deployment = projectDeployment(options)
+    const pdb = projectPdb(options)
+    const secret = projectSecret({ ...options, environmentVariables })
+    const service = projectService(options)
 
-    const outputDirectory = resolve(context.cwd, `.nexa/${context.projectName}/k8s`)
-    // Ensure that the output directory exists
+    const workspaceNexaOutputPath = String('.nexa/').concat(relativeProjectRoot).concat('/k8s')
+    const standaloneNexaOutputPath = relativeProjectRoot.concat('/k8s')
+
+    const manifestsOutputPath = options.standalone
+      ? standaloneNexaOutputPath
+      : workspaceNexaOutputPath
+
+    const outputDirectory = resolve(context.cwd, manifestsOutputPath)
+
+    // Create the output directory for the manifests, if it doesn't exist
     await mkdir(outputDirectory, { recursive: true })
 
+    // Resolve the path to the k8s manifest files and render the manifests to JSON
     const jsonManifests = [deployment, service, autoscaler, secret, pdb].map((resource) => ({
       path: resolve(outputDirectory, `${context.projectName}.${resource.kind.toLowerCase()}.yaml`),
       content: resource.toJSON(),
     }))
 
+    // Write the manifests to the file system
     for (const resource of jsonManifests) {
-      // console.log(toyaml.dump(resource.content))
       await compareAndWrite(resource.path, toyaml.dump(resource.content))
     }
 
     // Construct the kubectl apply command
     const kubectlApplyCommand: string[] = [
-      'kubectl',
       'apply',
-      options.dryRun ? '--dry-run=client' : undefined,
+      options.dryRun,
       ...jsonManifests.map((resource) => ['-f', resource.path]).flat(),
     ].filter(Boolean)
 
     // Spawn the apply process
     const kubectlApplyProcess: ChildProcessWithoutNullStreams = spawn(
-      kubectlApplyCommand[0],
-      kubectlApplyCommand.slice(1),
+      'kubectl',
+      kubectlApplyCommand,
       { cwd: context.cwd, stdio: 'inherit' }
     )
 
@@ -274,9 +103,42 @@ export default async function runExecutor(
   }
 }
 
-// ------------------------------------------------------------------
-// Utility functions
-// ------------------------------------------------------------------
+/**
+ * Normalize the options for the k8s manifest executor
+ * @param {K8sManifestSchema} options The options to normalize
+ * @param {ExecutorContext} context The context of the executor
+ */
+function normalizeOptions(
+  options: K8sManifestSchema,
+  context: ExecutorContext
+): K8sManifestOptions {
+  const projectName = context.projectName
+  const registry = options.registry ?? DEFAULT_REGISTRY
+  const organisation = options.organisation ?? DEFAULT_ORGANISATION
+
+  const namespace = options.namespace ?? 'dev'
+  const dryRun = !options.apply ? '--dry-run=client' : undefined
+  const imageName =
+    // user-provided fully qualified image name
+    options.imageName ??
+    // defaults to: ghcr.io/codyslexia/my-project-name
+    [registry, organisation, context.projectName].join('/').toLowerCase()
+
+  return {
+    imageName,
+    dryRun,
+    namespace,
+    registry,
+    organisation,
+    projectName,
+    ...options,
+    labels: {
+      app: 'codyslexia',
+      component: context.projectName,
+      ...normalizeLabels(options.labels ?? {}),
+    },
+  }
+}
 
 // Compare the existing file with the new content and write if different
 export async function compareAndWrite(filePath: string, content: string): Promise<void> {

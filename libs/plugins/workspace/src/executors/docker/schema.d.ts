@@ -1,7 +1,9 @@
 export interface DockerBuildExecutorSchema {
-  outputPath: string
-  sourceRoot?: string
+  baseDockerImage?: string
   imageName?: string
+  kind?: 'react' | 'nextjs' | 'nodejs' | 'graphql'
   registry?: string
   organisation?: string
+  outputPath?: string
+  standalone?: boolean
 }

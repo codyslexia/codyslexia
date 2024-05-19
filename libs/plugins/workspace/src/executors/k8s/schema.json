@@ -11,7 +11,9 @@
     "namespace": { "type": "string" },
     "organisation": { "type": "string" },
     "registry": { "type": "string" },
-    "labels": { "type": "object" }
+    "labels": { "type": "object" },
+    "standalone": { "type": "boolean" },
+    "apply": { "type": "boolean" }
   },
   "required": []
 }

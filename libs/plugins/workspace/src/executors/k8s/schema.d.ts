@@ -5,5 +5,6 @@ export interface K8sManifestSchema {
   organisation?: string
   registry?: string
   labels?: Record<string, string>
-  dryRun?: boolean
+  standalone?: boolean
+  apply?: boolean
 }

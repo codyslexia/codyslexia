@@ -19,7 +19,7 @@ profiles:
     requiresAllActivations: true
     manifests:
       rawYaml:
-        - .nexa/**/k8s/*.yaml
+        - .nexa/apps/**/**/k8s
       kustomize:
         buildArgs: []
         paths:
@@ -40,23 +40,28 @@ profiles:
       tagPolicy:
         sha256: {}
       artifacts:
+        # Faker API
         - image: ghcr.io/codyslexia/faker-api
           context: .
           docker:
-            dockerfile: .nexa/faker-api/Dockerfile
+            dockerfile: .nexa/apps/services/faker-api/Dockerfile
+        # Go API
         - image: ghcr.io/codyslexia/goapi
           context: .
           docker:
             dockerfile: apps/backend/goapi/Dockerfile
+        # QRCode API
         - image: ghcr.io/codyslexia/qrcode-api
           context: .
           docker:
-            dockerfile: .nexa/qrcode-api/Dockerfile
+            dockerfile: .nexa/apps/services/qrcode-api/Dockerfile
+        # Rust API
         - image: ghcr.io/codyslexia/rustapi
           context: apps/backend/rustapi
           docker:
             dockerfile: apps/backend/rustapi/Dockerfile
+        # TOTP API
         - image: ghcr.io/codyslexia/totp-api
           context: .
           docker:
-            dockerfile: .nexa/totp-api/Dockerfile
+            dockerfile: .nexa/apps/services/totp-api/Dockerfile
