@@ -19,6 +19,7 @@
       "@backend/auth": ["libs/backend/auth/src/index.ts"],
       "@codyslexia/colors": ["libs/packages/colors/src/index.ts"],
       "@codyslexia/statejs": ["libs/packages/statejs/src/index.ts"],
+      "@plugins/docker": ["libs/plugins/docker/src/index.ts"],
       "@plugins/golang": ["libs/plugins/golang/src/index.ts"],
       "@plugins/graphql": ["libs/plugins/graphql/src/index.ts"],
       "@plugins/rust": ["libs/plugins/rust/src/index.ts"],
