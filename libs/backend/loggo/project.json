@@ -9,6 +9,7 @@
       "executor": "@plugins/golang:test"
     },
     "lint": {
+      "cache": true,
       "executor": "@plugins/golang:lint"
     }
   }
