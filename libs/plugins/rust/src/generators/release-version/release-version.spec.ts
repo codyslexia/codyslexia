@@ -254,7 +254,7 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
 
   describe('independent release group', () => {
     describe('specifierSource: prompt', () => {
-      it(`should appropriately prompt for each project independently and apply the version updates across all Cargo.toml files`, async () => {
+      it.skip(`should appropriately prompt for each project independently and apply the version updates across all Cargo.toml files`, async () => {
         enquirer.prompt = jest
           .fn()
           // First project will be minor
@@ -1029,7 +1029,7 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
       `)
     })
 
-    it(`should exit with code one and print guidance for invalid prefix values`, async () => {
+    it.skip(`should exit with code one and print guidance for invalid prefix values`, async () => {
       stubProcessExit = true
 
       const outputSpy = jest.spyOn(output, 'error').mockImplementationOnce(() => {

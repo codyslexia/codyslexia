@@ -9,7 +9,7 @@ const options: K8sManifestSchema = {
   organisation: 'organisation',
   registry: 'registry',
   labels: {},
-  dryRun: true,
+  apply: true,
 }
 
 describe('Build Executor', () => {

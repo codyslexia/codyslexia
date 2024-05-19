@@ -4,7 +4,6 @@ import { DockerBuildExecutorSchema } from './schema'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const options: DockerBuildExecutorSchema = {
   outputPath: 'dist/apps/workspace',
-  sourceRoot: 'apps/workspace',
   imageName: 'workspace',
   registry: 'ghcr.io',
   organisation: 'codyslexia',
