@@ -41,7 +41,7 @@
     "docker": {
       "executor": "@plugins/workspace:docker",
       "outputs": ["{option.outputPath}"],
-      "dependsOn": ["build"],
+      "dependsOn": ["^build"],
       "options": {
         "outputPath": "dist/apps/services/qrcode-api"
       }
