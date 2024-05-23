@@ -1,3 +1,10 @@
+# [builder]
+FROM docker.io/alpine:3.20 AS builder
+
+# create a system group and user for the service
+RUN addgroup --system goapi && \
+  adduser --system -G goapi goapi
+
 # [runner]
 FROM scratch
 
@@ -12,7 +19,10 @@ WORKDIR /app
 # copy the compiled app to the 'runner' image
 COPY dist/apps/backend/goapi .
 
-# run as non-root user
+# copy the /etc/passwd file from the 'builder' image
+COPY --from=builder /etc/passwd /etc/passwd
+
+# set user to 'goapi'
 USER goapi
 
 # ephemeral port

@@ -37,9 +37,6 @@
         ]
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
     "registry": {
       "executor": "@nx/js:verdaccio",
       "options": {

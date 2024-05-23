@@ -1,5 +1,5 @@
 # use alpine linux as our 'base' image
-FROM docker.io/node:22-alpine3.19 AS base
+FROM docker.io/node:22.2.0-alpine3.19 AS base
 
 # set environment variables
 ENV HOST=0.0.0.0

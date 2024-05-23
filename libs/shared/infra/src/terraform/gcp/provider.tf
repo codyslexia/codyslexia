@@ -6,5 +6,5 @@
 provider "google" {
   project     = "codyslexia"
   region      = "us-east1"
-  zone      = "us-east1-c"
+  zone        = "us-east1-c"
 }

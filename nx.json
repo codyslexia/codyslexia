@@ -58,13 +58,6 @@
       "options": {}
     },
     {
-      "plugin": "@nx/cypress/plugin",
-      "options": {
-        "targetName": "e2e",
-        "componentTestingTargetName": "component-test"
-      }
-    },
-    {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
@@ -84,9 +77,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    },
-    "lint": {
-      "inputs": ["{workspaceRoot}/tools/eslint-rules/**/*"]
     },
     "@nx/esbuild:esbuild": {
       "cache": true,

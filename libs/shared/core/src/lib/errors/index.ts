@@ -1,5 +1,4 @@
 export * from './AppError'
-export * from './ExpressValidationError'
 export * from './InvalidTypeError'
 export * from './ResolutionError'
 export * from './UnexpectedError'

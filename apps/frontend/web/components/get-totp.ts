@@ -1,33 +1,8 @@
-const PROXY_CONF = {
-  '/api/faker': {
-    target: 'http://local.dev/api/faker',
-    secure: false,
-  },
-  '/api/goapi': {
-    target: 'http://local.dev/api/goapi',
-    secure: false,
-  },
-  '/api/qrcode': {
-    target: 'http://local.dev/api/qrcode',
-    secure: false,
-  },
-  '/api/rustapi': {
-    target: 'http://local.dev/api/rustapi',
-    secure: false,
-  },
-  '/auth/totp': {
-    target: 'http://local.dev/api/totp',
-    secure: false,
-  },
-  '/graphql': {
-    target: 'http://local.dev/graphql',
-    secure: false,
-  },
-}
+const BASE_URL = 'http://local.dev'
 
 export async function getTotp() {
   try {
-    const res = await fetch(`${PROXY_CONF['/auth/totp'].target}/generate`, {
+    const res = await fetch(`${BASE_URL}/api/totp/generate`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +18,7 @@ export async function getTotp() {
 
 export async function getRustApiStatus() {
   try {
-    const res = await fetch(`${PROXY_CONF['/api/rustapi'].target}`, {
+    const res = await fetch(`${BASE_URL}/api/rustapi`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +34,7 @@ export async function getRustApiStatus() {
 
 export async function getSeedsFromFakerApi() {
   try {
-    const res = await fetch(`${PROXY_CONF['/api/faker'].target}/schema`, {
+    const res = await fetch(`${BASE_URL}/api/faker/schema`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,7 +58,7 @@ export async function getSeedsFromFakerApi() {
 
 export async function getQrCode() {
   try {
-    const res = await fetch(`${PROXY_CONF['/api/qrcode'].target}/generate`, {
+    const res = await fetch(`${BASE_URL}/api/qrcode/generate`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -99,7 +74,7 @@ export async function getQrCode() {
 
 export async function getGoApiStatus() {
   try {
-    const res = await fetch(`${PROXY_CONF['/api/goapi'].target}`, {
+    const res = await fetch(`${BASE_URL}/api/goapi`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -115,7 +90,7 @@ export async function getGoApiStatus() {
 
 export async function getProjects() {
   try {
-    const res = await fetch(`${PROXY_CONF['/graphql'].target}`, {
+    const res = await fetch(`${BASE_URL}/graphql`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

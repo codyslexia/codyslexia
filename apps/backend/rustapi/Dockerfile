@@ -21,6 +21,9 @@ ENV PKG_CONFIG_ALLOW_CROSS=1
 
 RUN cargo install --target x86_64-unknown-linux-musl --path .
 
+RUN addgroup --system rustapi && \
+  adduser --system -G rustapi rustapi
+
 # [compressor]
 FROM alpine:3.19 AS compressor
 
@@ -37,7 +40,10 @@ RUN upx app-striped --best --lzma -o app
 # [runner]
 FROM scratch
 
+COPY --from=builder /etc/passwd /etc/passwd
 COPY --from=compressor /usr/app/app .
+
+USER rustapi
 
 EXPOSE 3000
 
