@@ -9,7 +9,7 @@ export interface ProjectAttrs {
 }
 
 export interface ProjectModel extends mongoose.Model<ProjectDoc> {
-  build(attrs: ProjectAttrs): typeof ProjectModel
+  build(attrs: ProjectAttrs): ProjectDoc
 }
 
 export interface ProjectDoc extends mongoose.Document {
