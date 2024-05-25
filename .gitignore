@@ -19,6 +19,7 @@ node_modules
 # dev
 .env
 .nexa
+*.secret.*
 
 # devcontainer
 .pnpm-store
@@ -79,7 +80,7 @@ cache
 .tox
 __pycache__
 
-# Expo
+# expo
 node_modules/
 .expo/
 .yarn/
@@ -94,13 +95,13 @@ npm-debug.*
 web-build/
 cache/
 
-# Byte-compiled / optimized / DLL files
+# byte-compiled
 __pycache__/
 *.py[cod]
 *$py.class
 .ruff-cache
 
-# Distribution / packaging
+# distribution
 .Python
 .eggs/
 *.egg-info/
@@ -108,15 +109,15 @@ __pycache__/
 *.egg
 MANIFEST
 
-# PyInstaller
+# pyinstaller
 *.manifest
 *.spec
 
-# Installer logs
+# pip
 pip-log.txt
 pip-delete-this-directory.txt
 
-# Unit test / coverage reports
+# tests
 htmlcov/
 .tox/
 .nox/
@@ -131,7 +132,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
-# Environments
+# environments
 .env
 .venv
 env/

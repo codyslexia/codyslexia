@@ -10,7 +10,7 @@ metadata:
   name: codyslexia
 requires:
   - configs: ['stack-core']
-    path: ./libs/shared/infra/src/skaffold/stack.yaml
+    path: ./tools/skaffold/src/stack/stack.yaml
 profiles:
   - name: dev
     activation:
@@ -19,18 +19,18 @@ profiles:
     requiresAllActivations: true
     manifests:
       rawYaml:
-        - .nexa/apps/**/**/k8s
+        - '.nexa/apps/**/**/k8s'
       kustomize:
         buildArgs: []
         paths:
-          # - .nexa/skaffold/dev # ?
-          - libs/shared/infra/src/kustomize/overlays/dev
+          # - '.nexa/skaffold/dev' # ?
+          - 'tools/kustomize/src/overlays/dev'
     deploy:
       kubeContext: docker-desktop
       kubectl:
         defaultNamespace: dev
         remoteManifests:
-          - libs/shared/infra/src/kustomize/overlays/dev
+          - './tools/kustomize/src/overlays/dev'
       helm: {}
     build:
       local:
@@ -65,3 +65,8 @@ profiles:
           context: .
           docker:
             dockerfile: .nexa/apps/services/totp-api/Dockerfile
+        # Frontend
+        - image: ghcr.io/codyslexia/frontend-web
+          context: .
+          docker:
+            dockerfile: apps/frontend/web/Dockerfile
