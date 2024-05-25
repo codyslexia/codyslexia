@@ -1,0 +1,29 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: client-tls
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: cert-manager
+spec:
+  secretName: client-tls
+  duration: 2160h # 90 days
+  renewBefore: 240h # 10 days
+  issuerRef:
+    name: cert-issuer
+    kind: Issuer
+  usages:
+    - signing
+    - key encipherment
+    - server auth
+    - client auth
+  commonName: '*.nexa.svc.cluster.local'
+  dnsNames:
+    - '*.nexa.svc'

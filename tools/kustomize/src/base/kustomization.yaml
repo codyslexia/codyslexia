@@ -1,0 +1,21 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+components:
+  - '../components/cert-manager'
+  - '../components/dnsutils'
+  - '../components/mongodb'
+  - '../components/nats-jetstream'
+  - '../components/openfaas'
+
+resources:
+  - ./client-tls.yaml
+  - ./github-registry.secret.yaml
+  - ./issuer.yaml
+  - ./roles.yaml
+  - ./server-tls.yaml

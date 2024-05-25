@@ -1,0 +1,47 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: stack-core
+requires:
+  - configs: ['cert-manager']
+    path: cert-manager.yaml
+  - configs: ['ingress-controller']
+    path: ingress-controller.yaml
+  - configs: ['kyverno']
+    path: kyverno.yaml
+  - configs: ['mongodb-operator']
+    path: mongodb-operator.yaml
+  - configs: ['nats-jetstream']
+    path: nats-jetstream.yaml
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: stack-next
+requires:
+  - configs: ['prometheus-operator']
+    path: prometheus-operator.yaml
+  - configs: ['redis']
+    path: redis.yaml
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: stack-experimental
+requires:
+  - configs: ['stackgres']
+    path: stackgres.yaml
+  - configs: ['mailhog']
+    path: mailhog.yaml
+  - configs: ['openfaas']
+    path: openfaas.yaml
+  - configs: ['vault']
+    path: vault.yaml

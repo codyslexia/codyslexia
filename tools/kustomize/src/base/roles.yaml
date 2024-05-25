@@ -1,0 +1,130 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['pods']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: service-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['services']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: deployment-manager
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['apps']
+    resources: ['deployments']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: secret-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['secrets']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: configmap-manager
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['configmaps']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pvc-manager
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['persistentvolumeclaims']
+    verbs: ['get', 'watch', 'list', 'create', 'update', 'delete']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pv-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['persistentvolumes']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: namespace-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['namespaces']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: node-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['nodes']
+    verbs: ['get', 'watch', 'list']
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: event-reader
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: rbac
+rules:
+  - apiGroups: ['']
+    resources: ['events']
+    verbs: ['get', 'watch', 'list']

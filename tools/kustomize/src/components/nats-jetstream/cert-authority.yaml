@@ -1,0 +1,29 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nats-cert-authority
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: nats
+spec:
+  isCA: true
+  commonName: nats-cert-authority
+  secretName: nats-cert-authority-secret
+  issuerRef:
+    name: selfsigned-cluster-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  duration: 2160h # 90 days
+  renewBefore: 240h # 10 days
+  usages:
+    - cert sign

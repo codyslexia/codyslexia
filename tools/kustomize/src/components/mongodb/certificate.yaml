@@ -1,0 +1,28 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: mongo-tls
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: mongodb
+spec:
+  secretName: mongo-tls
+  duration: 2160h # 90 days
+  renewBefore: 240h # 10 days
+  issuerRef:
+    name: mongo-ca
+    kind: Issuer
+  usages:
+    - signing
+    - key encipherment
+    - server auth
+  commonName: '*.mongodb.codyslexia.svc.cluster.local'
+  dnsNames:
+    - 'mongodb.codyslexia.svc'

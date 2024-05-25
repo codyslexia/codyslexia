@@ -1,0 +1,37 @@
+{
+  "name": "terraform",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/terraform/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "init": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "terraform init",
+        "cwd": "{projectRoot}/src/gcp"
+      }
+    },
+    "plan": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "terraform plan",
+        "cwd": "{projectRoot}/src/gcp"
+      }
+    },
+    "apply": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "terraform apply",
+        "cwd": "{projectRoot}/src/gcp"
+      }
+    },
+    "destroy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "terraform destroy",
+        "cwd": "{projectRoot}/src/gcp"
+      }
+    }
+  }
+}

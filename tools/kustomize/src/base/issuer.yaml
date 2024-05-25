@@ -1,0 +1,17 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: cert-issuer
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: cert-manager
+spec:
+  ca:
+    secretName: cert-authority-secret

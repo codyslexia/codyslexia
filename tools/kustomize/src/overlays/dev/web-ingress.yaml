@@ -1,0 +1,38 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+  namespace: dev
+  labels:
+    app: codyslexia
+    component: ingress
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-issuer
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '3600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '3600'
+    nginx.ingress.kubernetes.io/server-snippets: |
+      location /ws/ {
+        proxy_http_version 1.1;
+        proxy_redirect off;
+        proxy_buffering off;
+      }
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - local.dev
+      secretName: web-ingress-tls
+  rules:
+    - host: local.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-web
+                port:
+                  number: 80

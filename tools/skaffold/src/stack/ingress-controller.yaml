@@ -1,0 +1,20 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: ingress-controller
+requires:
+  - configs: ['cert-manager']
+deploy:
+  helm:
+    releases:
+      - name: ingress-nginx
+        remoteChart: ingress-nginx
+        repo: https://kubernetes.github.io/ingress-nginx
+        namespace: nexa
+        createNamespace: true

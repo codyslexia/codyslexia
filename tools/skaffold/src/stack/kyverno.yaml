@@ -1,0 +1,24 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+---
+apiVersion: skaffold/v4beta10
+kind: Config
+metadata:
+  name: kyverno
+requires:
+  - configs: ['kyverno']
+deploy:
+  helm:
+    releases:
+      - name: kyverno
+        remoteChart: kyverno
+        repo: https://kyverno.github.io/kyverno
+        namespace: nexa
+        createNamespace: true
+      - name: kyverno-policies
+        remoteChart: kyverno-policies
+        repo: https://kyverno.github.io/kyverno
+        namespace: nexa

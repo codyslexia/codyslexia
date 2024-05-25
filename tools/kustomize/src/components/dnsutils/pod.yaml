@@ -1,0 +1,34 @@
+# Copyright (c) 2023-2024 Codyslexia
+# @license MIT
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+#
+# create a 'dnsutil' for nslookups
+# e.g: kubectl exec -ti dnsutils -- nslookup sandbox-api
+#
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dnsutils
+  namespace: nexa
+  labels:
+    app: codyslexia
+    component: dnsutils
+spec:
+  containers:
+    - name: dnsutils
+      image: gcr.io/kubernetes-e2e-test-images/dnsutils:1.3
+      imagePullPolicy: IfNotPresent
+      command:
+        - sleep
+        - '3600'
+      resources:
+        requests:
+          memory: '64M'
+          cpu: '100m'
+        limits:
+          memory: '256M'
+          cpu: '100m'
+  restartPolicy: Always

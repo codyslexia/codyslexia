@@ -1,0 +1,15 @@
+{
+  "name": "skaffold",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/skaffold/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "skaffold run -p dev"
+      }
+    }
+  }
+}
