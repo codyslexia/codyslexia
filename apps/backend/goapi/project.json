@@ -43,6 +43,10 @@
     "test": {
       "cache": true,
       "executor": "@plugins/golang:test"
+    },
+    "tidy": {
+      "cache": true,
+      "executor": "@plugins/golang:tidy"
     }
   }
 }
