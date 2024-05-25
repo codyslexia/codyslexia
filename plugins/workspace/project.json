@@ -1,0 +1,56 @@
+{
+  "name": "@plugins/workspace",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "plugins/workspace/src",
+  "projectType": "library",
+  "tags": ["layer:isomorphic", "language:typescript", "scope:shared", "type:tool"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/plugins/workspace",
+        "main": "plugins/workspace/src/index.ts",
+        "tsConfig": "plugins/workspace/tsconfig.lib.json",
+        "assets": [
+          "plugins/workspace/*.md",
+          {
+            "input": "./plugins/workspace/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./plugins/workspace/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./plugins/workspace",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./plugins/workspace",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "registry": {
+      "executor": "@nx/js:verdaccio",
+      "options": {
+        "port": 4873,
+        "config": ".verdaccio/config.yml",
+        "storage": "tmp/local-registry/storage"
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}

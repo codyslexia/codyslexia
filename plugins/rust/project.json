@@ -1,0 +1,48 @@
+{
+  "name": "@plugins/rust",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "plugins/rust/src",
+  "projectType": "library",
+  "tags": ["language:typescript", "layer:isomorphic", "scope:workspace", "type:tool"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/plugins/rust",
+        "main": "plugins/rust/src/index.ts",
+        "tsConfig": "plugins/rust/tsconfig.lib.json",
+        "assets": [
+          "plugins/rust/*.md",
+          {
+            "input": "./plugins/rust/src",
+            "glob": "**/!(*.ts)",
+            "output": "./src"
+          },
+          {
+            "input": "./plugins/rust/src",
+            "glob": "**/*.d.ts",
+            "output": "./src"
+          },
+          {
+            "input": "./plugins/rust",
+            "glob": "generators.json",
+            "output": "."
+          },
+          {
+            "input": "./plugins/rust",
+            "glob": "executors.json",
+            "output": "."
+          }
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "{projectRoot}/jest.config.ts"
+      }
+    }
+  }
+}
