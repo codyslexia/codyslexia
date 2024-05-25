@@ -8,7 +8,7 @@ export interface UserAttrs {
 }
 
 export interface UserModel extends mongoose.Model<UserDoc> {
-  build(attrs: UserAttrs): any
+  build(attrs: UserAttrs): UserModel
 }
 
 export interface UserDoc extends mongoose.Document {

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { faker } from '@faker-js/faker'
 import { tuple } from '@shared/core'
 

@@ -1,5 +1,5 @@
 <p style="text-align: center;">
-  <h1>Nexa</h1>
+  <h1>Codyslexia</h1>
   Streamlined Cloud Microservices in Go, Rust & TypeScript
 </p>
 

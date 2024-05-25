@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ProjectModel } from '../shared/infra/database/mongoose/models/Project'
 
 export * as Query from './project-queries'

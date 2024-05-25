@@ -1,11 +1,7 @@
 import { spawn } from 'child_process'
 import { logger } from '@nx/devkit'
 import { resolve } from 'path'
-import { mkdir, readFile, writeFile, unlink } from 'fs/promises'
-import { Deployment } from 'kubernetes-models/apps/v1'
-import { Secret, Service } from 'kubernetes-models/v1'
-import { PodDisruptionBudget } from 'kubernetes-models/policy/v1'
-import { HorizontalPodAutoscaler } from 'kubernetes-models/autoscaling/v2'
+import { mkdir, readFile, writeFile } from 'fs/promises'
 import toyaml from 'js-yaml'
 
 import type { ExecutorContext } from '@nx/devkit'
@@ -93,7 +89,7 @@ export default async function runExecutor(
       })
     })
 
-    // Clean up temporary manifest
+    // TODO: @moatorres - Clean up temporary manifests after apply?
     // await unlink(k8sManifestFilePath)
 
     return { success: true }

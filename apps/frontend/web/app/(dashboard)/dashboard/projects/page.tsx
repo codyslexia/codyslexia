@@ -1,4 +1,5 @@
 import { Avatar, Badge, Box, Card, Flex, Grid, Heading, Text } from '@radix-ui/themes'
+
 import { getProjects } from '../../../../components/get-totp'
 
 export default async function ProjectsPage() {
@@ -11,7 +12,7 @@ export default async function ProjectsPage() {
         <JohnDoeCard />
       </Flex>
       <Grid columns="3" gap="3" width="auto">
-        {res.data.projects.map((project: Record<string, any>) => (
+        {res.data.projects.map((project: Record<string, string>) => (
           <Card key={project.id} style={{ marginBottom: '.5em', minWidth: '33%' }}>
             <Flex direction="row" justify="between" mb="4">
               <Heading>{project.name}</Heading>

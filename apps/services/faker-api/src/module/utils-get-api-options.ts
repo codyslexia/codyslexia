@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { FakerModules } from './types'
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { writeFileSync } = require('fs')
 
@@ -84,5 +86,5 @@ function getApiOptions<A>(api: A, filterFn?: (module: keyof A) => boolean): ApiO
 
 writeFileSync(
   'apps/services/faker-api/src/module/api.json',
-  JSON.stringify(getApiOptions(faker, (m) => fakerModules.includes(m as any)))
+  JSON.stringify(getApiOptions(faker, (m) => fakerModules.includes(m as FakerModules)))
 )

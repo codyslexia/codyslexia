@@ -6,6 +6,7 @@ import { UserModel } from '../shared/infra/database/mongoose/models/User'
 /**
  * Returns the current user.
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function me(parent, args, { auth }, info) {
   try {
     // TODO: @moatorres - Remove hardcoded user id and use jwt claims
