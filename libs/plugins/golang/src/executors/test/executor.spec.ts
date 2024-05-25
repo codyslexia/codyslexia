@@ -1,7 +1,7 @@
-import { ExecutorContext } from '@nx/devkit'
+import type { ExecutorContext } from '@nx/devkit'
 import * as commonFunctions from '../../utils'
 import executor from './executor'
-import { TestExecutorSchema } from './schema'
+import type { TestExecutorSchema } from './schema'
 
 jest.mock('../../utils', () => ({
   executeCommand: jest.fn().mockResolvedValue({ success: true }),
@@ -21,20 +21,23 @@ describe('Test Executor', () => {
     const spyExecute = jest.spyOn(commonFunctions, 'executeCommand')
     const output = await executor(options, context)
     expect(output.success).toBeTruthy()
-    expect(spyExecute).toHaveBeenCalledWith(['test', '-v', './...', '-cover', '-race'], {
+    expect(spyExecute).toHaveBeenCalledWith(['test', './...'], {
       cwd: 'apps/project',
     })
   })
 
   it.each`
-    config                 | flag
-    ${{ skipCover: true }} | ${'-cover'}
-    ${{ skipRace: true }}  | ${'-race'}
-  `('should remove flag $flag if skipped', async ({ config, flag }) => {
+    config                              | flag
+    ${{ verbose: true }}                | ${'-v'}
+    ${{ cover: true }}                  | ${'-cover'}
+    ${{ coverProfile: 'coverage.out' }} | ${'-coverprofile=coverage.out'}
+    ${{ race: true }}                   | ${'-race'}
+    ${{ run: 'TestProjection' }}        | ${'-run=TestProjection'}
+  `('should add flag $flag if enabled', async ({ config, flag }) => {
     const spyExecute = jest.spyOn(commonFunctions, 'executeCommand')
     const output = await executor({ ...options, ...config }, context)
     expect(output.success).toBeTruthy()
-    expect(spyExecute).toHaveBeenCalledWith(expect.not.arrayContaining([flag]), {
+    expect(spyExecute).toHaveBeenCalledWith(expect.arrayContaining([flag]), {
       cwd: 'apps/project',
     })
   })

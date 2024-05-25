@@ -19,6 +19,11 @@
       "implementation": "./src/executors/test/executor",
       "schema": "./src/executors/test/schema.json",
       "description": "Test a Go program"
+    },
+    "tidy": {
+      "implementation": "./src/executors/tidy/executor",
+      "schema": "./src/executors/tidy/schema.json",
+      "description": "Tidy the mod file of the application or library"
     }
   }
 }

@@ -1,6 +1,6 @@
-import { ExecutorContext } from '@nx/devkit'
+import type { ExecutorContext } from '@nx/devkit'
 import { executeCommand, extractProjectRoot } from '../../utils'
-import { TestExecutorSchema } from './schema'
+import type { TestExecutorSchema } from './schema'
 
 /**
  * This executor tests Go code using the `go test` command.
@@ -12,15 +12,21 @@ export default async function runExecutor(options: TestExecutorSchema, context: 
   return executeCommand(
     [
       'test',
-      '-v',
+      ...buildFlagIfEnabled('-v', options.verbose),
+      ...buildFlagIfEnabled('-cover', options.cover),
+      ...buildStringFlagIfValid(`-coverprofile`, options.coverProfile),
+      ...buildFlagIfEnabled('-race', options.race),
+      ...buildStringFlagIfValid(`-run`, options.run),
       './...',
-      ...buildFlagIfNotSkipped('-cover', options.skipCover),
-      ...buildFlagIfNotSkipped('-race', options.skipRace),
     ],
     { cwd: extractProjectRoot(context) }
   )
 }
 
-const buildFlagIfNotSkipped = (flag: string, skipped: boolean): string[] => {
-  return skipped ? [] : [flag]
+const buildFlagIfEnabled = (flag: string, enabled: boolean): string[] => {
+  return enabled ? [flag] : []
+}
+
+const buildStringFlagIfValid = (flag: string, value?: string): string[] => {
+  return value ? [`${flag}=${value}`] : []
 }

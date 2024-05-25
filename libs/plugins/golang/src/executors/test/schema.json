@@ -2,16 +2,30 @@
   "$schema": "https://json-schema.org/schema",
   "version": 2,
   "title": "Test executor",
-  "description": "Go test options",
+  "description": "Tests Go code using the `go test` command",
   "type": "object",
   "properties": {
-    "skipCover": {
-      "description": "Whether or not to skip coverage analysis during test execution",
+    "cover": {
+      "description": "Whether to enable coverage analysis",
       "type": "boolean",
       "default": false
     },
-    "skipRace": {
-      "description": "Whether or not to skip race detector during test execution",
+    "coverProfile": {
+      "description": "Write a coverage profile to the file after all tests have passed",
+      "type": "string",
+      "x-completion-type": "file"
+    },
+    "race": {
+      "description": "Whether to enable race detector",
+      "type": "boolean",
+      "default": false
+    },
+    "run": {
+      "description": "Run only tests matching this regular expression",
+      "type": "string"
+    },
+    "verbose": {
+      "description": "Whether to enable verbose test output",
       "type": "boolean",
       "default": false
     }
