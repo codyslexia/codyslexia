@@ -72,7 +72,7 @@ export default async function runExecutor(
     return {
       success: true,
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     return {
       success: false,
     }

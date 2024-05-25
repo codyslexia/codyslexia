@@ -1,5 +1,16 @@
-import { relative } from 'path'
-import { execSync } from 'child_process'
+import {
+  ProjectGraph,
+  ProjectGraphDependency,
+  ProjectGraphProjectNode,
+  Tree,
+  formatFiles,
+  joinPathFragments,
+  output,
+  workspaceRoot,
+} from '@nx/devkit'
+import chalk from 'chalk'
+import { execSync } from 'node:child_process'
+import { relative } from 'node:path'
 import { IMPLICIT_DEFAULT_RELEASE_GROUP } from 'nx/src/command-line/release/config/config'
 import { getFirstGitCommit, getLatestGitTagForPattern } from 'nx/src/command-line/release/utils/git'
 import {
@@ -14,16 +25,6 @@ import {
   validReleaseVersionPrefixes,
 } from 'nx/src/command-line/release/version'
 import { interpolate } from 'nx/src/tasks-runner/utils'
-import {
-  ProjectGraph,
-  ProjectGraphDependency,
-  ProjectGraphProjectNode,
-  Tree,
-  formatFiles,
-  joinPathFragments,
-  output,
-  workspaceRoot,
-} from '@nx/devkit'
 import { prerelease } from 'semver'
 import {
   modifyCargoTable,
@@ -101,8 +102,9 @@ Valid values are: ${validReleaseVersionPrefixes.map((s) => `"${s}"`).join(', ')}
       const cargoTomlPath = joinPathFragments(packageRoot, 'Cargo.toml')
       const workspaceRelativeCargoTomlPath = relative(workspaceRoot, cargoTomlPath)
 
+      const color = getColor(projectName)
       const log = (msg: string) => {
-        console.log(projectName + ' ' + msg)
+        console.log(color.instance.bold(projectName) + ' ' + msg)
       }
 
       if (!tree.exists(cargoTomlPath)) {
@@ -113,9 +115,11 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
         )
       }
 
-      output.logSingleLine(`Running release version for project: ${project.name}`)
+      output.logSingleLine(
+        `Running release version for project: ${color.instance.bold(project.name)}`
+      )
 
-      const cargoTomlContents = tree.read(cargoTomlPath)?.toString('utf-8')
+      const cargoTomlContents = tree.read(cargoTomlPath).toString('utf-8')
       const data = parseCargoToml(cargoTomlContents)
       const pkg = data.package
 
@@ -169,7 +173,7 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
             } else {
               log(
                 // In this code path we know that latestMatchingGitTag is defined, because we are not relying on the fallbackCurrentVersionResolver, so we can safely use the non-null assertion operator
-                `📄 Using the current version ${currentVersion} already resolved from git tag "${latestMatchingGitTag?.tag}".`
+                `📄 Using the current version ${currentVersion} already resolved from git tag "${latestMatchingGitTag.tag}".`
               )
             }
           }
@@ -320,8 +324,7 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
       versionData[projectName] = {
         currentVersion,
         dependentProjects,
-        // will stay as null in the final result in the case that no changes are detected
-        newVersion: null,
+        newVersion: null, // will stay as null in the final result in the case that no changes are detected
       }
 
       if (!specifier) {
@@ -415,9 +418,13 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
       }
     }
 
+    /**
+     * Ensure that formatting is applied so that version bump diffs are as minimal as possible
+     * within the context of the user's workspace.
+     */
     await formatFiles(tree)
 
-    // return the version data so that it can be leveraged by the overall version command
+    // Return the version data so that it can be leveraged by the overall version command
     return {
       data: versionData,
       callback: async (tree, opts) => {
@@ -446,11 +453,15 @@ To fix this you will either need to add a Cargo.toml file at that location, or c
     }
   } catch (e) {
     if (process.env.NX_VERBOSE_LOGGING === 'true') {
-      output.error({ title: e.message })
-      // dump the full stack trace in verbose mode
+      output.error({
+        title: e.message,
+      })
+      // Dump the full stack trace in verbose mode
       console.error(e)
     } else {
-      output.error({ title: e.message })
+      output.error({
+        title: e.message,
+      })
     }
     process.exit(1)
   }
@@ -472,7 +483,18 @@ function createResolvePackageRoot(customPackageRoot?: string) {
   }
 }
 
-const colors = [{ instance: 'e[0;32m', spinnerColor: 'green' }]
+const colors = [
+  { instance: chalk.green, spinnerColor: 'green' },
+  { instance: chalk.greenBright, spinnerColor: 'green' },
+  { instance: chalk.red, spinnerColor: 'red' },
+  { instance: chalk.redBright, spinnerColor: 'red' },
+  { instance: chalk.cyan, spinnerColor: 'cyan' },
+  { instance: chalk.cyanBright, spinnerColor: 'cyan' },
+  { instance: chalk.yellow, spinnerColor: 'yellow' },
+  { instance: chalk.yellowBright, spinnerColor: 'yellow' },
+  { instance: chalk.magenta, spinnerColor: 'magenta' },
+  { instance: chalk.magentaBright, spinnerColor: 'magenta' },
+] as const
 
 function getColor(projectName: string) {
   let code = 0
